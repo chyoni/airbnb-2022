@@ -44,3 +44,5 @@
   - pipenv install django-countries
 
 - #11 Room Model and ForeignKey()
+
+- #12 Room Items
