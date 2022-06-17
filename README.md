@@ -26,3 +26,7 @@
   - python manage.py makemigrations (프로젝트 내 models 확인하고 변경사항을 migration 파일로 생성)
   - python manage.py migrate (장고와 database(db.sqlite3)를 migrate)
   - python manage.py createsuperuser (admin 계정 생성 (localhost:8080/admin 에서 사용하는 계정))
+
+- #05 Create application
+
+  - django-admin startapp "Application name" (model을 만든다고 생각하면 되는데 그 모델안에 api, url 등등이 다 들어있어서 그걸 application이라고 명함, 그리고 이 application name은 복수형이어야 함)
