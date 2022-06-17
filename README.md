@@ -36,3 +36,5 @@
 - #07 User Model 2
 
 - #08 Admin Panel
+
+- #09 Abstract Model and Core Model
