@@ -34,3 +34,5 @@
 - #06 User Model
 
 - #07 User Model 2
+
+- #08 Admin Panel
