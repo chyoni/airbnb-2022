@@ -20,26 +20,43 @@ class AbstractItem(core_models.TimeStampedModel):
 class RoomType(AbstractItem):
     """ RoomType Model Definition """
 
-    pass
+    class Meta:
+        verbose_name = "Room Type"
+        ordering = ['created']
 
 
 class Amenity(AbstractItem):
     """ Amenity Model Definition """
 
-    pass
+    class Meta:
+        verbose_name_plural = "Amenities"
 
 
 class Facility(AbstractItem):
     """ Facility Model Definition """
 
-    pass
+    class Meta:
+        verbose_name_plural = "Facilities"
 
 
 class HouseRule(AbstractItem):
 
     """ HouseRule Model Definition """
 
-    pass
+    class Meta:
+        verbose_name = "House Rule"
+
+
+class Photo(core_models.TimeStampedModel):
+
+    """ Photo Model Definition """
+
+    caption = models.CharField(max_length=80)
+    file = models.ImageField()
+    room = models.ForeignKey("Room", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.caption
 
 
 class Room(core_models.TimeStampedModel):

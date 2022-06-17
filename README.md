@@ -46,3 +46,5 @@
 - #11 Room Model and ForeignKey()
 
 - #12 Room Items
+
+- #13 Verbose Set Photo Model
