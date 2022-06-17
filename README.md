@@ -38,3 +38,9 @@
 - #08 Admin Panel
 
 - #09 Abstract Model and Core Model
+
+- #10 Django country list
+
+  - pipenv install django-countries
+
+- #11 Room Model and ForeignKey()
