@@ -30,3 +30,5 @@
 - #05 Create application
 
   - django-admin startapp "Application name" (model을 만든다고 생각하면 되는데 그 모델안에 api, url 등등이 다 들어있어서 그걸 application이라고 명함, 그리고 이 application name은 복수형이어야 함)
+
+- #06 User Model
