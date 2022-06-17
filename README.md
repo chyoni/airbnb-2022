@@ -13,3 +13,16 @@
 
   - django-admin startproject config (config 파일생성)
   - 이렇게 config 폴더를 생성하면 그 config 폴더안에 또다른 config 폴더가 생기는데 그 폴더와 manage.py를 root로 옮겨주고 상위 config 폴더는 지워준다.
+
+- #03 Linter (flake8)
+
+  - pipenv install flake8 --dev (가상환경 내 dev 환경에서 flake8을 install)
+  - pipenv install black --dev --pre (formatter)
+  - 그리고 이거는 python 규칙같은건데 모든 py로 끝나는 파일을 특정 폴더에 집어넣고 그 파일을 사용하려면 \_\_init\_\_.py 파일이 그 폴더에 들어있어야 한다. 이게 이 폴더의 py 파일을 다른데서도 사용하겠다는 일종의 규칙이다.
+
+- #04 Run server
+
+  - python manage.py runserver (server를 실행)
+  - python manage.py makemigrations (프로젝트 내 models 확인하고 변경사항을 migration 파일로 생성)
+  - python manage.py migrate (장고와 database(db.sqlite3)를 migrate)
+  - python manage.py createsuperuser (admin 계정 생성 (localhost:8080/admin 에서 사용하는 계정))
