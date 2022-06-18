@@ -58,3 +58,7 @@
 - #16 List Model
 
 - #17 Conversation and Message Model
+
+- #18 Admin site
+
+  - https://docs.djangoproject.com/en/4.0/ref/contrib/admin/#django.contrib.admin.ModelAdmin.search_fields
