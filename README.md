@@ -9,6 +9,8 @@
   - pipenv shell (가상환경 안으로 진입)
   - pipenv install django (가상환경 안에서 장고 설치)
 
+  - pipenv install requests (이게 이제 pipfile에서 설치된 패키지들의 리스트를 보고 다른PC에서 필요한 패키지들을 내려받는 명령어)
+
 - #02 Config setting
 
   - django-admin startproject config (config 파일생성)
@@ -48,3 +50,5 @@
 - #12 Room Items
 
 - #13 Verbose Set Photo Model
+
+- #14 Reviews Model
