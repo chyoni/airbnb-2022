@@ -54,3 +54,5 @@
 - #14 Reviews Model
 
 - #15 Reservation Model
+
+- #16 List Model
