@@ -56,3 +56,5 @@
 - #15 Reservation Model
 
 - #16 List Model
+
+- #17 Conversation and Message Model
