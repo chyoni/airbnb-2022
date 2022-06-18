@@ -67,9 +67,14 @@
 
 - #20 Admin site 3 (count object's specific attributes)
 
-- #21 QuerySet, vars, dir, set
+- #21 QuerySet, vars, dir, set, objects
 
   - QuerySet은 list를 나타내고 장고에서 어떤 리스트들을 반환할 때 사용된다.
   - dir()는 어떤 객체의 가지고 있는 변수와 메소드를 보여준다.
   - vars()는 어떤 객체의 attributes를 dictionary 형태로 보여준다.
   - set은 foreign key에 대한 데이터를 보여준다 (장고에서 만들어주는 기능)
+  - objects 는 클래스의 object (객체)를 전부 가져와서 원하는걸 찾을 수 있다. (ex: User.objects.all())
+
+- #22 Related name for set
+
+  - set으로 foreign key를 가져오는데 그 set의 이름을 바꿔주는 게 related_name이다.

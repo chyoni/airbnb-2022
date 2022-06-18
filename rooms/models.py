@@ -77,8 +77,11 @@ class Room(core_models.TimeStampedModel):
     check_out = models.TimeField()
     instant_book = models.BooleanField(default=False)
     # on_delete가 CASCADE는 이 Room의 host를 삭제할경우 host와 연결된 room들도 다 삭제하겠다는 의미
-    host = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
-    room_type = models.ForeignKey(RoomType, on_delete=models.SET_NULL, null=True)
+    host = models.ForeignKey(user_models.User, related_name="rooms", on_delete=models.CASCADE)
+    room_type = models.ForeignKey(
+        RoomType, related_name="rooms",
+        on_delete=models.SET_NULL, null=True
+    )
     amenities = models.ManyToManyField(Amenity, blank=True)
     facilities = models.ManyToManyField(Facility, blank=True)
     house_rules = models.ManyToManyField(HouseRule, blank=True)
