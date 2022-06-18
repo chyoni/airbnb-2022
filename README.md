@@ -64,3 +64,5 @@
   - https://docs.djangoproject.com/en/4.0/ref/contrib/admin/#django.contrib.admin.ModelAdmin.search_fields
 
 - #19 Admin site 2
+
+- #20 Admin site 3 (count object's specific attributes)
