@@ -66,7 +66,7 @@ class RoomAdmin(admin.ModelAdmin):
 
     # self 이 클래스를 말하고 obj는 한 행(row)을 말함
     def count_amenities(self, obj):
-        print(obj.amenities.all())
+        return obj.amenities.count()
 
 
 @admin.register(models.Photo)

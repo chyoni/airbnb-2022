@@ -66,3 +66,10 @@
 - #19 Admin site 2
 
 - #20 Admin site 3 (count object's specific attributes)
+
+- #21 QuerySet, vars, dir, set
+
+  - QuerySet은 list를 나타내고 장고에서 어떤 리스트들을 반환할 때 사용된다.
+  - dir()는 어떤 객체의 가지고 있는 변수와 메소드를 보여준다.
+  - vars()는 어떤 객체의 attributes를 dictionary 형태로 보여준다.
+  - set은 foreign key에 대한 데이터를 보여준다 (장고에서 만들어주는 기능)
