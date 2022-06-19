@@ -86,3 +86,7 @@
 - #25 Reservation status by check InOut
 
 - #26 Conversation, List Admin and Model
+
+- #27 MEDIA_ROOT on Django
+
+  - https://docs.djangoproject.com/en/4.0/ref/settings/#media-root

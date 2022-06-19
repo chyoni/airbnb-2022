@@ -52,7 +52,8 @@ class Photo(core_models.TimeStampedModel):
     """ Photo Model Definition """
 
     caption = models.CharField(max_length=80)
-    file = models.ImageField()
+    # upload_to 는 media_root에서 어디에 저장할지 정하는 attributes 즉, 아래같이 작성하면 media_root/room_photos 경로에 저장하게됨
+    file = models.ImageField(upload_to="room_photos")
     room = models.ForeignKey("Room", related_name="photos", on_delete=models.CASCADE)
 
     def __str__(self):
