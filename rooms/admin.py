@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import mark_safe
 from . import models
 
 
@@ -85,4 +86,10 @@ class PhotoAdmin(admin.ModelAdmin):
 
     """ Photo Admin Definition """
 
-    pass
+    list_display = ['__str__', 'get_thumbnail']
+
+    # Django는 너무 훌륭해서 함부로 input을 사용하지 못하게 막는다. 그래서 장고야 이건 안전해 ! 라고 말해주는게 mark_safe method이다.
+    def get_thumbnail(self, obj):
+        return mark_safe(f'<img width="120px" src="{obj.file.url}"/>')
+
+    get_thumbnail.short_description = "Thumbnail"

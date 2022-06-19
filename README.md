@@ -92,3 +92,5 @@
   - https://docs.djangoproject.com/en/4.0/ref/settings/#media-root
 
 - #28 MEDIA_URL and urlpatterns
+
+- #29 Photo Admin
