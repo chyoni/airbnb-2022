@@ -16,9 +16,18 @@ class ItemAdmin(admin.ModelAdmin):
         return obj.rooms.count()
 
 
+class PhotoInline(admin.TabularInline):
+
+    model = models.Photo
+
+
 @admin.register(models.Room)
 class RoomAdmin(admin.ModelAdmin):
     """ Room Admin Definition"""
+
+    # inlines는 admin안에 admin을 넣을 수 있는데 이게 가능한 이유는
+    # room 안에 photo가 있다는 것을 우리 장고가 알기 때문에! (relationship)
+    inlines = [PhotoInline]
 
     fieldsets = [
         (
@@ -68,6 +77,8 @@ class RoomAdmin(admin.ModelAdmin):
         'room_type', 'amenities',
         'facilities', 'house_rules'
         ]
+
+    raw_id_fields = ['host']
 
     search_fields = ['city', 'host__username']
 

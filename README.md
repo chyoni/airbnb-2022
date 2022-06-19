@@ -94,3 +94,5 @@
 - #28 MEDIA_URL and urlpatterns
 
 - #29 Photo Admin
+
+- #30 Inline Admin
