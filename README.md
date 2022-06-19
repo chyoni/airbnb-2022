@@ -82,3 +82,5 @@
 - #23 Admin site and photo counts func
 
 - #24 Average Function
+
+- #25 Reservation status by check InOut

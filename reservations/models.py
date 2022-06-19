@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from core import models as core_models
 
 
@@ -24,3 +25,15 @@ class Reservation(core_models.TimeStampedModel):
 
     def __str__(self):
         return f'{self.room} - {self.check_in}'
+
+    def in_progress(self):
+        now = timezone.now().date()
+        return (now >= self.check_in) and (now <= self.check_out)
+
+    def is_finished(self):
+        now = timezone.now().date()
+        return now > self.check_out
+
+    # 이거는 어드민 패널에서 볼 때 이쁜 X, Y 표시를 이모티콘으로 보여주는 기능
+    in_progress.boolean = True
+    is_finished.boolean = True
