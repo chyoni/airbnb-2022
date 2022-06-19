@@ -18,3 +18,16 @@ class Review(core_models.TimeStampedModel):
 
     def __str__(self):
         return f'{self.review} - {self.room}'
+
+    # 어드민 패널에서 함수를 만들지 않은 이유는 이 함수를 프론트에서도 사용할거라서
+    def rating_average(self):
+        avg = (
+            self.accuracy +
+            self.communication +
+            self.cleanliness +
+            self.location +
+            self.check_in +
+            self.value) / 6
+        return round(avg, 2)
+
+    rating_average.short_description = "Avg"

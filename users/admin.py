@@ -21,3 +21,20 @@ class UserAdmin(UserAdmin):
             )
         }),
     )
+
+    list_display = [
+        'username',
+        'first_name',
+        'last_name',
+        'email',
+        'language',
+        'currency',
+        'is_active',
+        'is_staff',
+        'is_superuser',
+        'superhost'
+    ]
+
+    list_filter = UserAdmin.list_filter + (
+        'superhost',
+    )

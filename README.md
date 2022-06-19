@@ -80,3 +80,5 @@
   - set으로 foreign key를 가져오는데 그 set의 이름을 바꿔주는 게 related_name이다.
 
 - #23 Admin site and photo counts func
+
+- #24 Average Function
