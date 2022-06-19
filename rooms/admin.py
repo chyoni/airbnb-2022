@@ -32,7 +32,7 @@ class RoomAdmin(admin.ModelAdmin):
     fieldsets = [
         (
             "Basic Info",
-            {"fields": ['name', 'description', 'country', 'address', 'price']}
+            {"fields": ['name', 'description', 'city', 'country', 'address', 'price']}
         ),
         (
             "Times",

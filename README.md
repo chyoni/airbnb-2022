@@ -96,3 +96,7 @@
 - #29 Photo Admin
 
 - #30 Inline Admin
+
+- #31 Save method Override
+
+  - https://docs.djangoproject.com/en/4.0/topics/db/models/#overriding-model-methods
