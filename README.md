@@ -106,3 +106,8 @@
   - Create my custom commands practice
 
 - #33 Amenities created for command
+
+- #34 Using django_seed for fake user create
+
+  - pipenv install django_seed
+  - https://github.com/Brobin/django-seed

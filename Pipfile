@@ -8,6 +8,8 @@ django = "*"
 pillow = "*"
 django-countries = "*"
 requests = "*"
+django-seed = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 flake8 = "*"
