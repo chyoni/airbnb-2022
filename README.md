@@ -111,3 +111,5 @@
 
   - pipenv install django_seed
   - https://github.com/Brobin/django-seed
+
+- #35 Using django_seed and faker for fake room create
