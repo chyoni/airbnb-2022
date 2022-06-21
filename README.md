@@ -113,3 +113,5 @@
   - https://github.com/Brobin/django-seed
 
 - #35 Using django_seed and faker for fake room create
+
+- #36 Photo seed
