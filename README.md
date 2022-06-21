@@ -100,3 +100,7 @@
 - #31 Save method Override
 
   - https://docs.djangoproject.com/en/4.0/topics/db/models/#overriding-model-methods
+
+- #32 Django-seeds and custom commands
+
+  - Create my custom commands practice
