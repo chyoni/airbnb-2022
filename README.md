@@ -104,3 +104,5 @@
 - #32 Django-seeds and custom commands
 
   - Create my custom commands practice
+
+- #33 Amenities created for command
