@@ -121,3 +121,5 @@
 - #38 Review seed
 
 - #39 Lists seed
+
+- #40 Reservations seed
