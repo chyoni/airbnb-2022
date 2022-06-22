@@ -117,3 +117,5 @@
 - #36 Photo seed
 
 - #37 Amenity, Facility, HouseRule seed
+
+- #38 Review seed
