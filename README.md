@@ -115,3 +115,5 @@
 - #35 Using django_seed and faker for fake room create
 
 - #36 Photo seed
+
+- #37 Amenity, Facility, HouseRule seed
