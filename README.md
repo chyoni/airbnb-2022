@@ -119,3 +119,5 @@
 - #37 Amenity, Facility, HouseRule seed
 
 - #38 Review seed
+
+- #39 Lists seed
