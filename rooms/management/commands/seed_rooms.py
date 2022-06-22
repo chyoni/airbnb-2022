@@ -34,6 +34,7 @@ class Command(BaseCommand):
             'bedrooms': lambda x: random.randint(1, 5),
             'baths': lambda x: random.randint(1, 5)
         })
+        # seed는 만든 object의 pk를 반환함
         inserted_rooms = seeder.execute()
         # list는 dict_values를 list로 바꿔주는거고 flatten은 [[]] -> [] 로 바꿔줌
         inserted_clean = flatten(list(inserted_rooms.values()))
