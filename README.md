@@ -129,3 +129,5 @@
 - #42 urls patterns fix
 
 - #43 Django templates settings
+
+- #44 Base HTML
