@@ -123,3 +123,5 @@
 - #39 Lists seed
 
 - #40 Reservations seed
+
+- #41 Views, Urls interaction
