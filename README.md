@@ -125,3 +125,5 @@
 - #40 Reservations seed
 
 - #41 Views, Urls interaction
+
+- #42 urls patterns fix
