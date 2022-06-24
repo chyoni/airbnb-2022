@@ -127,3 +127,5 @@
 - #41 Views, Urls interaction
 
 - #42 urls patterns fix
+
+- #43 Django templates settings

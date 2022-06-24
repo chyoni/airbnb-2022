@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 
 def all_rooms(request):
-    return HttpResponse(content="Hello")
+    hungry = True
+    return render(request, template_name="all_rooms.html", context={'hungry': hungry})
