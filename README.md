@@ -131,3 +131,5 @@
 - #43 Django templates settings
 
 - #44 Base HTML
+
+- #45 Templates syntex (Divide and Conquer)
