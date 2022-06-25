@@ -6,7 +6,7 @@ from users import models as user_models
 
 class AbstractItem(core_models.TimeStampedModel):
 
-    """ Abstract Item """
+    """Abstract Item"""
 
     name = models.CharField(max_length=80)
 
@@ -18,22 +18,22 @@ class AbstractItem(core_models.TimeStampedModel):
 
 
 class RoomType(AbstractItem):
-    """ RoomType Model Definition """
+    """RoomType Model Definition"""
 
     class Meta:
         verbose_name = "Room Type"
-        ordering = ['created']
+        ordering = ["created"]
 
 
 class Amenity(AbstractItem):
-    """ Amenity Model Definition """
+    """Amenity Model Definition"""
 
     class Meta:
         verbose_name_plural = "Amenities"
 
 
 class Facility(AbstractItem):
-    """ Facility Model Definition """
+    """Facility Model Definition"""
 
     class Meta:
         verbose_name_plural = "Facilities"
@@ -41,7 +41,7 @@ class Facility(AbstractItem):
 
 class HouseRule(AbstractItem):
 
-    """ HouseRule Model Definition """
+    """HouseRule Model Definition"""
 
     class Meta:
         verbose_name = "House Rule"
@@ -49,7 +49,7 @@ class HouseRule(AbstractItem):
 
 class Photo(core_models.TimeStampedModel):
 
-    """ Photo Model Definition """
+    """Photo Model Definition"""
 
     caption = models.CharField(max_length=80)
     # upload_to 는 media_root에서 어디에 저장할지 정하는 attributes 즉, 아래같이 작성하면 media_root/room_photos 경로에 저장하게됨
@@ -62,7 +62,7 @@ class Photo(core_models.TimeStampedModel):
 
 class Room(core_models.TimeStampedModel):
 
-    """ Room Model Definition """
+    """Room Model Definition"""
 
     name = models.CharField(max_length=140)
     description = models.TextField()
@@ -78,10 +78,11 @@ class Room(core_models.TimeStampedModel):
     check_out = models.TimeField()
     instant_book = models.BooleanField(default=False)
     # on_delete가 CASCADE는 이 Room의 host를 삭제할경우 host와 연결된 room들도 다 삭제하겠다는 의미
-    host = models.ForeignKey(user_models.User, related_name="rooms", on_delete=models.CASCADE)
+    host = models.ForeignKey(
+        user_models.User, related_name="rooms", on_delete=models.CASCADE
+    )
     room_type = models.ForeignKey(
-        RoomType, related_name="rooms",
-        on_delete=models.SET_NULL, null=True
+        RoomType, related_name="rooms", on_delete=models.SET_NULL, null=True
     )
     amenities = models.ManyToManyField(Amenity, related_name="rooms", blank=True)
     facilities = models.ManyToManyField(Facility, related_name="rooms", blank=True)

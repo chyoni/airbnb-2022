@@ -135,3 +135,9 @@
 - #45 Templates syntex (Divide and Conquer)
 
 - #46 Handle URL QueryString
+
+- #47 Django Templates filter
+
+  - https://docs.djangoproject.com/en/4.0/ref/templates/language/#filters
+
+- #48 Vanilla Pagination with python
