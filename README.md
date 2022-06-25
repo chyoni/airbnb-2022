@@ -141,3 +141,7 @@
   - https://docs.djangoproject.com/en/4.0/ref/templates/language/#filters
 
 - #48 Vanilla Pagination with python
+
+- #49 Django Paginator
+
+  - https://docs.djangoproject.com/en/4.0/ref/paginator/#paginator

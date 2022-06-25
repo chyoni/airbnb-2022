@@ -1,20 +1,19 @@
-from math import ceil
 from django.shortcuts import render
+from django.core.paginator import Paginator
 from . import models
 
 
 def all_rooms(request):
-    page: str = request.GET.get("page", 1)
-    page = int(page or 1)
-    interval: int = 10
+    page: str = request.GET.get("page")
 
-    limit: int = interval * page
-    offset: int = limit - interval
+    # 아래 코드가 쿼리셋을 바로 즉시 불러올거라고 에상하겠지만, 쿼리셋은 게으르다. 그래서 이 쿼리셋을 어디선가 호출하여 사용하지 않는 이상 그 때까지는 가져오지 않는다.
+    room_list = models.Room.objects.all()
 
-    all_rooms = models.Room.objects.all()[offset:limit]
-    page_count = ceil(models.Room.objects.count() / interval)
+    paginator = Paginator(room_list, 10)
+    rooms = paginator.get_page(page)
+
     return render(
         request,
         "rooms/home.html",
-        context={"rooms": all_rooms, "page": page, "page_count": page_count},
+        context={"rooms": rooms},
     )
