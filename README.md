@@ -133,3 +133,5 @@
 - #44 Base HTML
 
 - #45 Templates syntex (Divide and Conquer)
+
+- #46 Handle URL QueryString
