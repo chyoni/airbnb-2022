@@ -147,3 +147,8 @@
   - https://docs.djangoproject.com/en/4.0/ref/paginator/#paginator
 
 - #50 Handle Exception for Paginator.page()
+
+- #51 Classed Base View
+
+  - https://docs.djangoproject.com/en/4.0/ref/class-based-views/generic-display/#listview
+  - https://ccbv.co.uk/
