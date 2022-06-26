@@ -145,3 +145,5 @@
 - #49 Django Paginator
 
   - https://docs.djangoproject.com/en/4.0/ref/paginator/#paginator
+
+- #50 Handle Exception for Paginator.page()
