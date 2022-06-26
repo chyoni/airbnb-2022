@@ -152,3 +152,5 @@
 
   - https://docs.djangoproject.com/en/4.0/ref/class-based-views/generic-display/#listview
   - https://ccbv.co.uk/
+
+- #52 Django URLs arguments
