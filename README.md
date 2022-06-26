@@ -158,3 +158,5 @@
 - #53 get_absolute_url() method for admin panel to viewsite
 
 - #54 Room Detail Page
+
+- #55 Search views 1

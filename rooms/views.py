@@ -5,6 +5,7 @@ from . import models
 
 
 def all_rooms(request):
+    """all rooms on Home"""
     page: str = request.GET.get("page", 1)
 
     # 아래 코드가 쿼리셋을 바로 즉시 불러올거라고 에상하겠지만, 쿼리셋은 게으르다. 그래서 이 쿼리셋을 어디선가 호출하여 사용하지 않는 이상 그 때까지는 가져오지 않는다.
@@ -25,8 +26,15 @@ def all_rooms(request):
 
 
 def room_detail(request, pk):
+    """Room detail method"""
     try:
         room = models.Room.objects.get(pk=pk)
         return render(request, "rooms/detail.html", context={"room": room})
     except models.Room.DoesNotExist:
         return redirect(reverse("core:home"))
+
+
+def search(request):
+    city: str = request.GET.get("city")
+    print(str.capitalize(city))
+    return render(request, "rooms/search.html", context={"city": city})
