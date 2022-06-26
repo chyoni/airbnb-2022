@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage
+from django.urls import reverse
 from . import models
 
 
@@ -24,5 +25,8 @@ def all_rooms(request):
 
 
 def room_detail(request, pk):
-    print(pk)
-    return render(request, "rooms/detail.html")
+    try:
+        room = models.Room.objects.get(pk=pk)
+        return render(request, "rooms/detail.html", context={"room": room})
+    except models.Room.DoesNotExist:
+        return redirect(reverse("core:home"))
