@@ -154,3 +154,5 @@
   - https://ccbv.co.uk/
 
 - #52 Django URLs arguments
+
+- #53 get_absolute_url() method for admin panel to viewsite
