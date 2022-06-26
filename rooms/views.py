@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage
 from django.urls import reverse
+from django_countries import countries
 from . import models
 
 
@@ -35,6 +36,24 @@ def room_detail(request, pk):
 
 
 def search(request):
-    city: str = request.GET.get("city")
-    print(str.capitalize(city))
-    return render(request, "rooms/search.html", context={"city": city})
+    city: str = request.GET.get("city", "Maldives")
+    country: str = request.GET.get("country", "KR")
+    room_type: int = int(request.GET.get("room_type", 0))
+    room_types = models.RoomType.objects.all()
+
+    print(room_type)
+
+    in_urls = {
+        "selected_city": city,
+        "selected_country": country,
+        "selected_room_type": room_type,
+    }
+    choices = {
+        "countries": countries,
+        "room_types": room_types,
+    }
+    return render(
+        request,
+        "rooms/search.html",
+        context={**in_urls, **choices},
+    )

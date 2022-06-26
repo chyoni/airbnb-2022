@@ -160,3 +160,5 @@
 - #54 Room Detail Page
 
 - #55 Search views 1
+
+- #56 Search views 2
