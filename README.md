@@ -166,3 +166,5 @@
 - #57 Search views 3
 
 - #58 Search filtering
+
+- #59 Search filtering 2

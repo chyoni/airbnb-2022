@@ -47,8 +47,8 @@ def search(request):
     s_amenities: list = request.GET.getlist("amenities")
     s_facilities: list = request.GET.getlist("facilities")
     s_house_rules: list = request.GET.getlist("house_rules")
-    instant: bool = request.GET.get("instant")
-    superhost: bool = request.GET.get("superhost")
+    instant: bool = bool(request.GET.get("instant"))
+    superhost: bool = bool(request.GET.get("superhost"))
 
     room_types = models.RoomType.objects.all()
     amenities = models.Amenity.objects.all()
@@ -80,11 +80,52 @@ def search(request):
 
     filter_args = {}
 
-    filter_args["city__startswith"] = city
+    if city != "":
+        filter_args["city__startswith"] = city
+
     filter_args["country"] = country
 
     if room_type != 0:
         filter_args["room_type__pk"] = room_type
+
+    if price != 0:
+        filter_args["price__lte"] = price
+
+    if guests != 0:
+        filter_args["guests__gte"] = guests
+
+    if bedrooms != 0:
+        filter_args["bedrooms__gte"] = bedrooms
+
+    if beds != 0:
+        filter_args["beds__gte"] = beds
+
+    if baths != 0:
+        filter_args["baths__gte"] = baths
+
+    if instant is True:
+        filter_args["instant_book"] = True
+
+    if superhost is True:
+        filter_args["host__superhost"] = True
+
+    if len(s_amenities) > 0:
+        filter_amenities = []
+        for s_ame in s_amenities:
+            filter_amenities.append(int(s_ame))
+        filter_args["amenities__pk__in"] = filter_amenities
+
+    if len(s_facilities) > 0:
+        filter_facilities = []
+        for s_ame in s_facilities:
+            filter_facilities.append(int(s_ame))
+        filter_args["facilities__pk__in"] = filter_facilities
+
+    if len(s_house_rules) > 0:
+        filter_house_rules = []
+        for s_ame in s_house_rules:
+            filter_house_rules.append(int(s_ame))
+        filter_args["house_rules__pk__in"] = filter_house_rules
 
     rooms = models.Room.objects.filter(**filter_args)
 
