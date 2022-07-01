@@ -44,16 +44,26 @@ def search(request):
     bedrooms: int = int(request.GET.get("bedrooms", 0))
     beds: int = int(request.GET.get("beds", 0))
     baths: int = int(request.GET.get("baths", 0))
+    s_amenities: list = request.GET.getlist("amenities")
+    s_facilities: list = request.GET.getlist("facilities")
+    s_house_rules: list = request.GET.getlist("house_rules")
+    instant = request.GET.get("instant")
+    superhost = request.GET.get("superhost")
+
     room_types = models.RoomType.objects.all()
     amenities = models.Amenity.objects.all()
     facilities = models.Facility.objects.all()
-
-    print(room_type)
+    house_rules = models.HouseRule.objects.all()
 
     in_urls = {
         "selected_city": city,
         "selected_country": country,
         "selected_room_type": room_type,
+        "selected_amenities": s_amenities,
+        "selected_facilities": s_facilities,
+        "selected_house_rules": s_house_rules,
+        "selected_instant": instant,
+        "selected_superhost": superhost,
         "price": price,
         "guests": guests,
         "bedrooms": bedrooms,
@@ -65,6 +75,7 @@ def search(request):
         "room_types": room_types,
         "amenities": amenities,
         "facilities": facilities,
+        "house_rules": house_rules,
     }
     return render(
         request,

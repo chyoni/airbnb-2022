@@ -60,12 +60,24 @@
         </div>
 
         <div>
+            <label for="instant">Instant Book Only?</label>
+            <input {% if selected_instant %}checked{% endif %} type="checkbox" name="instant" id="instant" />
+        </div>
+
+        <div>
+            <label for="superhost">Superhost Only?</label>
+            <input {% if selected_superhost %}checked{% endif %} type="checkbox" name="superhost" id="superhost" />
+        </div>
+
+        <div>
             <h3>Amenities</h3>
             <ul>
             {% for ame in amenities %}
                 <li>
                     <label for="a_{{ame.pk}}" >{{ame.name}}</label>
-                    <input type="checkbox" id="a_{{ame.pk}}" name="amenities" value="{{ame.pk}}" />
+                    <input type="checkbox" id="a_{{ame.pk}}" 
+                    name="amenities" value="{{ame.pk}}"
+                    {% if ame.pk|slugify in selected_amenities %}checked{% endif %} />
                 </li>
             {% endfor %}
             </ul>
@@ -77,7 +89,23 @@
             {% for fac in facilities %}
                 <li>
                     <label for="f_{{fac.pk}}" >{{fac.name}}</label>
-                    <input type="checkbox" id="a_{{fac.pk}}" name="facnities" value="{{fac.pk}}" />
+                    <input type="checkbox" id="f_{{fac.pk}}" 
+                    name="facilities" value="{{fac.pk}}"
+                    {% if fac.pk|slugify in selected_facilities %}checked{% endif %} />
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+
+        <div>
+            <h3>House Rules</h3>
+            <ul>
+            {% for hr in house_rules %}
+                <li>
+                    <label for="h_{{hr.pk}}" >{{hr.name}}</label>
+                    <input type="checkbox" id="h_{{hr.pk}}" 
+                    name="house_rules" value="{{hr.pk}}"
+                    {% if hr.pk|slugify in selected_house_rules %}checked{% endif %} />
                 </li>
             {% endfor %}
             </ul>
