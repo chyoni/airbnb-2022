@@ -176,3 +176,7 @@
 - #62 Login views 2
 
   - clean method
+
+- #63 Login views 3
+
+  - clean method implements
