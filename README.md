@@ -184,3 +184,5 @@
 - #64 Login, Logout views 4
 
 - #65 Signup views 1
+
+- #66 Signup views 2

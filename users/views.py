@@ -33,3 +33,18 @@ def signup(request):
     if request.method == "GET":
         form = forms.SignupForm()
         return render(request, "users/signup.html", context={"form": form})
+
+    if request.method == "POST":
+        form = forms.SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            email = form.cleaned_data.get("email")
+            password = form.cleaned_data.get("password")
+
+            user = authenticate(request, username=email, password=password)
+            if user is not None:
+                login(request, user=user)
+                return redirect(reverse("core:home"))
+
+        return render(request, "users/signup.html", context={"form": form})
