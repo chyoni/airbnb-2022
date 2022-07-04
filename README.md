@@ -180,3 +180,5 @@
 - #63 Login views 3
 
   - clean method implements
+
+- #64 Login, Logout views 4
