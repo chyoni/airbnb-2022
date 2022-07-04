@@ -1,11 +1,15 @@
 from django.shortcuts import render
-from django.views import View
+from . import forms
 
 
-class LoginView(View):
+def login(request):
 
-    def get(self, request):
-        return render(request, "users/login.html")
+    if request.method == "GET":
+        form = forms.LoginForm()
+        return render(request, "users/login.html", context={"form": form})
 
-    def post(self, request):
-        pass
+    if request.method == "POST":
+        form = forms.LoginForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+        return render(request, "users/login.html", context={"form": form})

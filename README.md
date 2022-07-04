@@ -172,3 +172,7 @@
 - #60 Search views done
 
 - #61 Login views 1
+
+- #62 Login views 2
+
+  - clean method
