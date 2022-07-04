@@ -182,3 +182,5 @@
   - clean method implements
 
 - #64 Login, Logout views 4
+
+- #65 Signup views 1

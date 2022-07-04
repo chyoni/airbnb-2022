@@ -26,3 +26,10 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect(reverse("core:home"))
+
+
+def signup(request):
+
+    if request.method == "GET":
+        form = forms.SignupForm()
+        return render(request, "users/signup.html", context={"form": form})
