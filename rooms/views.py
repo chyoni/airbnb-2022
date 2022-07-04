@@ -127,7 +127,13 @@ def search(request):
             filter_house_rules.append(int(s_ame))
         filter_args["house_rules__pk__in"] = filter_house_rules
 
-    rooms = models.Room.objects.filter(**filter_args)
+    qs = models.Room.objects.filter(**filter_args).order_by("-created")
+
+    paginator = Paginator(qs, 10, orphans=5)
+
+    page = request.GET.get("page", 1)
+
+    rooms = paginator.get_page(page)
 
     return render(
         request,

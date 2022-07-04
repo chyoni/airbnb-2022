@@ -168,3 +168,5 @@
 - #58 Search filtering
 
 - #59 Search filtering 2
+
+- #60 Search views done

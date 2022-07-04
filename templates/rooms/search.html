@@ -119,4 +119,16 @@
         <h4>{{room.name}}</h4>
     {% endfor %}
 
+    <h3>
+        {% if rooms.has_previous %}
+        <a href="?page={{rooms.number|add:-1}}">&larr;</a>
+        {% endif %}
+        
+        Page: {{rooms.number}} of {{rooms.paginator.num_pages}}
+        
+        {% if rooms.has_next %}
+        <a href="?page={{rooms.number|add:1}}">&rarr;</a>
+        {% endif %}
+    </h3>
+
 {% endblock content %}
