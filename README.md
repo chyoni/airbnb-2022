@@ -186,3 +186,9 @@
 - #65 Signup views 1
 
 - #66 Signup views 2
+
+- #67 django-dotenv, Send email for verification 1
+
+  ```bash
+  pipenv install django-dotenv
+  ```
