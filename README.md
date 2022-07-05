@@ -202,3 +202,11 @@
 - #71 Github login 1
 
   - https://docs.github.com/en/developers/apps/building-oauth-apps
+
+- #72 Github login 2
+
+  - requests라는 라이브러리는 axios같은 rest api를 때릴 수 있는 라이브러리
+
+  ```bash
+  pipenv install requests
+  ```
