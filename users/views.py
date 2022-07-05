@@ -44,6 +44,7 @@ def signup(request):
 
             user = authenticate(request, username=email, password=password)
             if user is not None:
+                user.verify_email()
                 login(request, user=user)
                 return redirect(reverse("core:home"))
 

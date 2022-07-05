@@ -1,7 +1,7 @@
 import uuid
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.conf import settings
 from django.core.mail import send_mail
 
 
@@ -58,9 +58,10 @@ class User(AbstractUser):
             self.email_secret = secret
 
             send_mail(
-                "Verify Chyonee BNB Account",
-                f"Verify account, this is your secret: {secret}",
-                settings.EMAIL_FROM,
+                "Verify ChyoneeBNB Account",
+                f"Verify your account, this is your secret: {secret}",
+                settings.EMAIL_HOST_USER,
                 [self.email],
-                fail_silently=False)
+                fail_silently=False
+            )
         return
