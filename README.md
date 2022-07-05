@@ -192,3 +192,5 @@
   ```bash
   pipenv install django-dotenv
   ```
+
+- #68 Send email for verification 1
