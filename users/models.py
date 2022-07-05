@@ -52,7 +52,7 @@ class User(AbstractUser):
 
     avatar = models.ImageField(blank=True, upload_to="avatars")
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
-    bio = models.TextField(blank=True)
+    bio = models.TextField(blank=True, null=True)
     birthdate = models.DateField(blank=True, null=True)
     language = models.CharField(
         choices=LANGUAGE_CHOICES, max_length=2, blank=True, default=LANGUAGE_KOREAN
@@ -73,13 +73,15 @@ class User(AbstractUser):
             self.email_secret = secret
             self.save()
 
-            html_message = render_to_string("emails/verify_email.html", {"secret": secret})
+            html_message = render_to_string(
+                "emails/verify_email.html", {"secret": secret}
+            )
             send_mail(
                 "Verify ChyoneeBNB Account",
                 strip_tags(html_message),
                 settings.EMAIL_HOST_USER,
                 [self.email],
                 fail_silently=False,
-                html_message=html_message
+                html_message=html_message,
             )
         return

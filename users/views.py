@@ -71,7 +71,9 @@ def complete_verification(request, secret):
 def github_login(request):
     client_id = os.environ.get("GH_ID")
     redirect_uri = "http://127.0.0.1:8000/users/login/github/callback"
-    return redirect(f"https://github.com/login/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&scope=read:user")
+    return redirect(
+        f"https://github.com/login/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&scope=read:user"
+    )
 
 
 def github_callback(request):
@@ -79,16 +81,44 @@ def github_callback(request):
     client_id = os.environ.get("GH_ID")
     client_secret = os.environ.get("GH_SECRET")
     if code is not None:
-        request = requests.post(
+        response = requests.post(
             url=f"https://github.com/login/oauth/access_token?client_id={client_id}&client_secret={client_secret}&code={code}",
-            headers={"Accept": "application/json"})
+            headers={"Accept": "application/json"},
+        )
 
-        if request.ok and request.status_code == 200:
-            bearer_token = request.json()['access_token']
+        if response.ok and response.status_code == 200:
+            bearer_token = response.json()["access_token"]
             github_user = requests.get(
                 url="https://api.github.com/user",
-                headers={"Authorization": f"token {bearer_token}"}
+                headers={
+                    "Authorization": f"token {bearer_token}",
+                    "Accept": "application/json",
+                },
             )
-            print(github_user.json())
+            profile_json = github_user.json()
+            username = profile_json.get("login", None)
+
+            if username is not None:
+                name = profile_json.get("name")
+                email = profile_json.get("email")
+                bio = profile_json.get("bio")
+
+                try:
+                    user = models.User.objects.get(email=email)
+                    if user is not None:
+                        return redirect(reverse("users:login"))
+                except models.User.DoesNotExist:
+                    new_github_user = models.User.objects.create(
+                        username=email, first_name=name, bio=bio, email=email
+                    )
+                    login(request, new_github_user)
+                    return redirect(reverse("core:home"))
+            else:
+                return redirect(reverse("users:login"))
+        elif response.json()["error"] is not None:
+            print(response.json()["error"])
+            return redirect(reverse("core:home"))
+        else:
+            return redirect(reverse("core:home"))
     else:
         return redirect(reverse("core:home"))
