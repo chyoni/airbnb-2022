@@ -194,3 +194,5 @@
   ```
 
 - #68 Send email for verification 1
+
+- #69 Send email for verification 2
