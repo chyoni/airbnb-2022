@@ -198,3 +198,7 @@
 - #69 Send email for verification 2
 
 - #70 Send email for verification DONE
+
+- #71 Github login 1
+
+  - https://docs.github.com/en/developers/apps/building-oauth-apps
