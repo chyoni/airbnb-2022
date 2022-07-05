@@ -1,3 +1,4 @@
+from doctest import UnexpectedException
 import os
 import requests
 from django.shortcuts import render, redirect
@@ -76,49 +77,66 @@ def github_login(request):
     )
 
 
+class UserAlreadyExistException(Exception):
+
+    pass
+
+
 def github_callback(request):
-    code: str = request.GET.get("code", None)
-    client_id = os.environ.get("GH_ID")
-    client_secret = os.environ.get("GH_SECRET")
-    if code is not None:
-        response = requests.post(
-            url=f"https://github.com/login/oauth/access_token?client_id={client_id}&client_secret={client_secret}&code={code}",
-            headers={"Accept": "application/json"},
-        )
-
-        if response.ok and response.status_code == 200:
-            bearer_token = response.json()["access_token"]
-            github_user = requests.get(
-                url="https://api.github.com/user",
-                headers={
-                    "Authorization": f"token {bearer_token}",
-                    "Accept": "application/json",
-                },
+    try:
+        code: str = request.GET.get("code", None)
+        client_id = os.environ.get("GH_ID")
+        client_secret = os.environ.get("GH_SECRET")
+        if code is not None:
+            response = requests.post(
+                url=f"https://github.com/login/oauth/access_token?client_id={client_id}&client_secret={client_secret}&code={code}",
+                headers={"Accept": "application/json"},
             )
-            profile_json = github_user.json()
-            username = profile_json.get("login", None)
 
-            if username is not None:
-                name = profile_json.get("name")
-                email = profile_json.get("email")
-                bio = profile_json.get("bio")
+            if response.ok and response.status_code == 200:
+                bearer_token = response.json()["access_token"]
+                github_user = requests.get(
+                    url="https://api.github.com/user",
+                    headers={
+                        "Authorization": f"token {bearer_token}",
+                        "Accept": "application/json",
+                    },
+                )
+                profile_json = github_user.json()
+                username = profile_json.get("login", None)
 
-                try:
-                    user = models.User.objects.get(email=email)
-                    if user is not None:
-                        return redirect(reverse("users:login"))
-                except models.User.DoesNotExist:
-                    new_github_user = models.User.objects.create(
-                        username=email, first_name=name, bio=bio, email=email
-                    )
-                    login(request, new_github_user)
+                if username is not None:
+                    name = profile_json.get("name")
+                    email = profile_json.get("email")
+                    bio = profile_json.get("bio")
+
+                    try:
+                        user = models.User.objects.get(email=email)
+                        if user.login_method != models.User.LOGIN_GITHUB:
+                            raise UserAlreadyExistException()
+                    except models.User.DoesNotExist:
+                        user = models.User.objects.create(
+                            username=email,
+                            first_name=name,
+                            bio=bio,
+                            email=email,
+                            login_method=models.User.LOGIN_GITHUB,
+                            email_verified=True,
+                        )
+                        user.set_unusable_password()
+                        user.save()
+                    login(request, user)
                     return redirect(reverse("core:home"))
+                else:
+                    raise UnexpectedException()
+            elif response.json()["error"] is not None:
+                print(response.json()["error"])
+                raise UnexpectedException()
             else:
-                return redirect(reverse("users:login"))
-        elif response.json()["error"] is not None:
-            print(response.json()["error"])
-            return redirect(reverse("core:home"))
+                raise UnexpectedException()
         else:
-            return redirect(reverse("core:home"))
-    else:
+            raise UnexpectedException()
+    except UnexpectedException:
         return redirect(reverse("core:home"))
+    except UserAlreadyExistException:
+        return redirect(reverse("users:login"))
