@@ -18,6 +18,7 @@ class UserAdmin(UserAdmin):
                 "language",
                 "currency",
                 "superhost",
+                "email_verified",
             )
         }),
     )
@@ -32,7 +33,9 @@ class UserAdmin(UserAdmin):
         'is_active',
         'is_staff',
         'is_superuser',
-        'superhost'
+        'superhost',
+        "email_verified",
+        "email_secret",
     ]
 
     list_filter = UserAdmin.list_filter + (
