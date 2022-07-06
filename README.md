@@ -222,3 +222,5 @@
 - #76 Kakao login 2
 
 - #77 Kakao login DONE
+
+- #78 Kakao login really DONE

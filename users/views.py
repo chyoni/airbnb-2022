@@ -4,6 +4,7 @@ import requests
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
+from django.core.files.base import ContentFile
 from . import forms, models
 
 
@@ -172,6 +173,7 @@ def kakao_callback(request):
                 )
                 email = user.json().get("email", None)
                 nickname = user.json().get("nickname", None)
+                profile_image = user.json().get("picture", None)
                 if email is None:
                     print("email required")
                     raise UnexpectedException()
@@ -189,6 +191,12 @@ def kakao_callback(request):
                     )
                     kakao_user.set_unusable_password()
                     kakao_user.save()
+
+                    if profile_image is not None:
+                        k_profile = requests.get(profile_image)
+                        kakao_user.avatar.save(
+                            f"{nickname}-avatar", ContentFile(k_profile.content)
+                        )
                 login(request, kakao_user)
                 return redirect(reverse("core:home"))
         else:
@@ -196,4 +204,5 @@ def kakao_callback(request):
     except UnexpectedException:
         return redirect(reverse("core:home"))
     except UserAlreadyExistException:
+        print("User with that email already exists")
         return redirect(reverse("users:login"))
