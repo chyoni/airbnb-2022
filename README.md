@@ -241,3 +241,8 @@
   - create gulpfile.js
   - gulpfile.js setup
   - create assets folder > scss folder > styles.scss
+
+- #80 TailwindCSS Setup 2
+
+  - set static folder path on settings.py
+  - use static/css/styles.css for html file
