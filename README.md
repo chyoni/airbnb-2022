@@ -224,3 +224,20 @@
 - #77 Kakao login DONE
 
 - #78 Kakao login really DONE
+
+- #79 TailwindCSS Setup
+
+  - ##1
+
+  ```bash
+  npm init
+  npm install gulp gulp-postcss gulp-sass gulp-csso node-sass sass
+  npm install tailwindcss -D
+  npm install autoprefixer -D
+  npx tailwind init
+  ```
+
+  - ##2
+  - create gulpfile.js
+  - gulpfile.js setup
+  - create assets folder > scss folder > styles.scss

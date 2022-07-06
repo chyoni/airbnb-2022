@@ -164,3 +164,5 @@ cython_debug/
 
 # Image
 uploads
+
+node_modules/
