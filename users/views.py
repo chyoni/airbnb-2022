@@ -170,9 +170,30 @@ def kakao_callback(request):
                     url="https://kapi.kakao.com/v1/oidc/userinfo",
                     headers={"Authorization": f"Bearer {access_token}"},
                 )
-
-                print(user.json())
+                email = user.json().get("email", None)
+                nickname = user.json().get("nickname", None)
+                if email is None:
+                    print("email required")
+                    raise UnexpectedException()
+                try:
+                    kakao_user = models.User.objects.get(email=email)
+                    if kakao_user.login_method != models.User.LOGIN_KAKAO:
+                        raise UserAlreadyExistException()
+                except models.User.DoesNotExist:
+                    kakao_user = models.User.objects.create(
+                        email=email,
+                        username=email,
+                        first_name=nickname,
+                        login_method=models.User.LOGIN_KAKAO,
+                        email_verified=True,
+                    )
+                    kakao_user.set_unusable_password()
+                    kakao_user.save()
+                login(request, kakao_user)
+                return redirect(reverse("core:home"))
         else:
             raise UnexpectedException()
     except UnexpectedException:
         return redirect(reverse("core:home"))
+    except UserAlreadyExistException:
+        return redirect(reverse("users:login"))

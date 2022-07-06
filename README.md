@@ -220,3 +220,5 @@
   - https://developers.kakao.com
 
 - #76 Kakao login 2
+
+- #77 Kakao login DONE
