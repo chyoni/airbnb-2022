@@ -246,3 +246,10 @@
 
   - set static folder path on settings.py
   - use static/css/styles.css for html file
+
+- #81 Design 1
+
+  - ### tailwindCSS가 3.0 이상 버전으로 올라오면서 tailwind.config.js 파일에 content에 어떤 파일이 tailwind css를 사용할것이냐를 지정해줘야 한다.
+  - ### tailwind css 이거를 지금 gulp로 가져왔는데 postcss 방식으로 가져와보자. 현재는 지금 새로운 properties 추가될때마다 "gulp" script를 실행해야해서 너무 귀찮다.
+  - em = 가장 가까운 요소의 font-size
+  - rem = root의 font-size

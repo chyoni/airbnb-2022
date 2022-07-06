@@ -1,6 +1,4 @@
-<a href="{% url 'core:home' %}">Chyonee BNB</a>
-<ul>
-  
+<ul class="flex items-center text-sm font-medium space-x-5">  
     {% if user.is_authenticated %}
       <li><a href="{% url 'users:logout' %}">Logout</a></li>
     {% else %}
