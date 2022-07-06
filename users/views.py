@@ -140,3 +140,39 @@ def github_callback(request):
         return redirect(reverse("core:home"))
     except UserAlreadyExistException:
         return redirect(reverse("users:login"))
+
+
+def kakao_login(request):
+    kakao_client_id = os.environ.get("KAKAO_CLIENT_ID")
+
+    return redirect(
+        f"https://kauth.kakao.com/oauth/authorize?client_id={kakao_client_id}&redirect_uri=http://127.0.0.1:8000/users/login/kakao/callback&response_type=code"
+    )
+
+
+def kakao_callback(request):
+    try:
+        code = request.GET.get("code", None)
+        if code is not None:
+            kakao_client_id = os.environ.get("KAKAO_CLIENT_ID")
+
+            response = requests.post(
+                url=f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={kakao_client_id}&redirect_uri=http://127.0.0.1:8000/users/login/kakao/callback&code={code}&scope=profile_image,gender,account_email,profile_nickname",
+                headers={"Content-Type": "application/x-www-form-urlencoded"},
+            )
+            error = response.json().get("error", None)
+            if error is not None:
+                print(error)
+                raise UnexpectedException()
+            else:
+                access_token = response.json().get("access_token")
+                user = requests.get(
+                    url="https://kapi.kakao.com/v1/oidc/userinfo",
+                    headers={"Authorization": f"Bearer {access_token}"},
+                )
+
+                print(user.json())
+        else:
+            raise UnexpectedException()
+    except UnexpectedException:
+        return redirect(reverse("core:home"))

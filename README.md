@@ -214,3 +214,9 @@
 - #73 Github login 3
 
 - #74 Github login DONE
+
+- #75 Kakao login 1
+
+  - https://developers.kakao.com
+
+- #76 Kakao login 2
