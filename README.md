@@ -253,3 +253,5 @@
   - ### tailwind css 이거를 지금 gulp로 가져왔는데 postcss 방식으로 가져와보자. 현재는 지금 새로운 properties 추가될때마다 "gulp" script를 실행해야해서 너무 귀찮다.
   - em = 가장 가까운 요소의 font-size
   - rem = root의 font-size
+
+- #82 Design 2
