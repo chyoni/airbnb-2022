@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
+
+.nav_link {
+    @apply hover:bg-gray-100 py-2 px-2 rounded-full text-sm font-medium text-gray-800
+}
+
 @tailwind utilities;

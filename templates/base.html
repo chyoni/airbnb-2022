@@ -14,23 +14,24 @@
     <title>{% block title %}{% endblock title %} | Chyonee BNB</title>
   </head>
   <body class="text-gray-800">
-    <header class="px-5 container max-w-full flex items-center justify-between h-16 border-b shadow-md border-gray-300">
+    <header class="fixed top-0 px-5 container max-w-full flex items-center justify-between h-16 border-b shadow-md border-gray-300 bg-white">
       <div class="flex items-center space-x-7">
         <a href="{% url 'core:home' %}">
           <img class="w-8" src="{% static 'img/logo.png' %}" />
         </a>
         {% block search-bar %}
           <form method="get" action="{% url 'rooms:search' %}">
-            <input class="focus:outline-none transition-colors focus:border-2 focus:border-red-200 
-            border border-gray-300 px-12 py-2 shadow-md rounded-md" name="city" placeholder="Search for city" />
+            <input class="focus:outline-none transition-colors focus:border-2 focus:border-red-200 w-96 hover:shadow-lg hover:transition-shadow
+            border border-gray-300 px-12 py-2 shadow-md rounded-md font-medium text-sm text-gray-700 placeholder:text-gray-500" name="city" placeholder="Search for city" />
           </form>
         {% endblock search-bar %}
       </div>
       {% include "partials/nav.html" %}
     </header>
 
-    {% block content %} {% endblock %} 
-    
+    <div class="mt-20">
+      {% block content %} {% endblock %} 
+    </div>
     {% include "partials/footer.html" %}
   </body>
 </html>
