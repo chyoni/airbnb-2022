@@ -1,4 +1,22 @@
 <div class="w-full">
     <div class="w-full h-72 bg-cover bg-center rounded-2xl" style="background-image:url({{room.first_photo}});"></div>
-    <h3>{{room.name}}</h3>
+    <div class="mt-2 flex justify-between items-center">
+        {% comment %} truncatechars는 ...으로 잘리는 부분이 보여짐 {% endcomment %}
+        <div>
+            <span class="text-sm font-semibold text-gray-900">{{room.name|slice:9}},</span>
+            <span class="text-sm font-semibold text-gray-900">{{room.city}}</span>
+        </div>
+        <div>
+            <i class="fas fa-star text-xs text-gray-900"></i>
+            <span class="text-sm font-normal text-gray-900">{{room.total_rating}}</span>
+        </div>
+    </div>
+    <div class="-mt-1">
+        <span class="text-gray-500 font-medium text-sm">{% if room.host.superhost %}Professional Host{% else %}Individual Host{% endif %}</span>
+    </div>
+    <div>
+        <i class="fa-solid fa-euro-sign text-xs text-gray-900"></i>
+        <span class="text-gray-700 font-semibold text-sm">{{room.price}}</span>
+        <span class="text-sm text-gray-700">night</span>
+    </div>
 </div>
