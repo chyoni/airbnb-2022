@@ -110,3 +110,8 @@ class Room(core_models.TimeStampedModel):
             return 0
 
     total_rating.short_description = "total"
+
+    def first_photo(self):
+        # 이렇게 queryset array에서 첫번째거를 가져오고 싶다면 python 에서는 ,를 사용한다.
+        (photo,) = self.photos.all()[:1]
+        return photo.file.url

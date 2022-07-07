@@ -255,3 +255,7 @@
   - rem = root의 font-size
 
 - #82 Design 2
+
+- #83 Design 3
+
+  - pass variable template to template

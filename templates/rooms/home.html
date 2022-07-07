@@ -7,15 +7,15 @@ Home
 {% block content %}
 
 <div class="container mx-auto">
-    <div class="bg-gray-800 container h-[50vh] mt-40 rounded-2xl mb-24 bg-center bg-cover" 
-        style="background-image: url(https://a0.muscache.com/im/pictures/177ed8a7-557b-480f-8319-4f8330e2c692.jpg?)"></div>
+    <div class="bg-gray-800 -mx-40 h-[50vh] mt-40 rounded-2xl mb-24 bg-center bg-cover" 
+        style="background-image: url(https://images.unsplash.com/photo-1657038863423-60ed9298d34d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format)"></div>
 
-    {% for room in rooms.object_list %}
-    <h3>
-    <a href="{% url 'rooms:detail' room.pk %}">{{room.name}} / ${{room.price}}</a>
-    </h3>
-    {% endfor %}
-
+    <div class="grid grid-cols-5 gap-5 -mx-40">
+        {% for room in rooms.object_list %}
+            {% include 'partials/room_card.html' with room=room %}
+        {% endfor %}
+    </div>
+    
     <h3>
         {% if rooms.has_previous %}
         <a href="?page={{rooms.number|add:-1}}">&larr;</a>
