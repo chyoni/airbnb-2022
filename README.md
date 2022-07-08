@@ -265,3 +265,7 @@
 - #85 Design 5
 
   - room card done
+
+- #86 Design 6
+
+  - search icon absolute position
