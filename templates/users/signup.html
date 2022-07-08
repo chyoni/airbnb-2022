@@ -5,11 +5,19 @@
 {% block search-bar %}{% endblock search-bar %}
 
 {% block content %}
+<div class="xl:max-w-xl container mx-auto mt-40 flex items-center justify-center flex-col border border-gray-300 p-10">
+    <div class="w-10/12 flex items-center mb-3">
+        <span class="justify-self-start text-sm font-semibold">Welcome to Chyonee BNB</span>
+    </div>
     {% include 'partials/social_login.html' %}    
-    
-    <form method="POST" action="{% url 'users:signup' %}">
+
+    <form class="w-full flex-col flex items-center" method="POST" action="{% url 'users:login' %}">
         {% csrf_token %}
         {{form.as_p}}
-        <button>Sign up</button>
+        <button class="w-10/12 px-8 py-3 border border-red-500 bg-red-500 bg-gradient-to-r from-red-400
+                rounded-md text-center text-white text-sm font-medium hover:bg-gradient-to-l hover:bg-red-300 transition-colors">
+                Sign up
+        </button>
     </form>
+</div>
 {% endblock content %}

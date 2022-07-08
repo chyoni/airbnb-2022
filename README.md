@@ -269,3 +269,7 @@
 - #86 Design 6
 
   - search icon absolute position
+
+- #87 Design 7
+
+  - font family

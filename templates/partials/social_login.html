@@ -1,8 +1,10 @@
-<div>
-    <a href="{% url 'users:github-login' %}">
+<div class="w-full flex flex-col items-center space-y-3 mb-10">
+    <a class="w-10/12 px-8 py-3 border border-gray-900 bg-white rounded-md text-center text-black text-sm font-medium" href="{% url 'users:github-login' %}">
+        <i class="fa-brands fa-github fa-lg text-black mr-2"></i>
         Continue with Github
     </a>
-    <a href="{% url 'users:kakao-login' %}">
+    <a class="w-10/12 px-8 py-3 border border-gray-900 bg-white rounded-md text-center text-black text-sm font-medium" href="{% url 'users:kakao-login' %}">
+        <i class="fa-solid fa-comment fa-lg text-yellow-300 mr-2"></i>
         Continue with Kakao
     </a>
 </div>

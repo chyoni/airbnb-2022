@@ -4,12 +4,17 @@
         <div class="mt-2 flex justify-between items-center">
             {% comment %} truncatechars는 ...으로 잘리는 부분이 보여짐 {% endcomment %}
             <div>
-                <span class="text-sm font-semibold text-gray-900">{{room.name|slice:9}},</span>
-                <span class="text-sm font-semibold text-gray-900">{{room.city}}</span>
+                <span class="font-semibold text-gray-900 text-xs">{{room.name|slice:8}},</span>
+                <span class="font-semibold text-gray-900 text-xs">{{room.city}}</span>
             </div>
             <div>
-                <i class="fas fa-star text-xs text-gray-900"></i>
-                <span class="text-sm font-normal text-gray-900">{{room.total_rating}}</span>
+                <i class="fas fa-star fa-xs text-gray-900 text-[10px]"></i>
+                <span class="text-[10px] font-normal text-gray-900">
+                {% if room.total_rating == 0 %}
+                    New
+                {% else %}
+                    {{room.total_rating}}
+                {% endif %}</span>
             </div>
         </div>
         <div class="-mt-1">
