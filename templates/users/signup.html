@@ -23,5 +23,10 @@
                 Sign up
         </button>
     </form>
+
+    <div class="w-10/12 text-gray-700 flex items-center justify-center space-x-10 -mb-5 mt-5">
+        <span>already have account?</span>
+        <a class="px-2 py-2 border text-gray-700 border-red-400 rounded-lg" href="{% url 'users:login' %}">Login</a>
+    </div>
 </div>
 {% endblock content %}
