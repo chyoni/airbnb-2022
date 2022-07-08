@@ -23,7 +23,9 @@
         </a>
         {% block search-bar %}
           <form class="relative" method="get" action="{% url 'rooms:search' %}">
-            <i class="fa-solid fa-magnifying-glass absolute inset-0 mx-3 my-3 w-3"></i>
+            <div class="absolute inset-0 mx-3 my-3 w-8 h-full">
+              <i class="fa-solid fa-magnifying-glass text-center w-full"></i>
+            </div>
             <input class="focus:outline-none transition-colors focus:border-2 focus:border-red-200 w-96 hover:shadow-lg hover:transition-shadow
             border border-gray-300 px-12 py-2 shadow-md rounded-md font-medium text-sm text-gray-700 placeholder:text-gray-500" name="city" placeholder="Search for city" />
           </form>

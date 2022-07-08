@@ -5,4 +5,12 @@
     @apply hover:bg-gray-100 py-2 px-2 rounded-full text-sm font-medium text-gray-800
 }
 
+.basic_input {
+    @apply w-full px-8 py-3 border rounded-md font-medium focus:outline-none focus:border-gray-700
+}
+
+.basic_button {
+    @apply w-full px-8 py-3 rounded-md text-center text-white text-sm font-medium transition-colors
+}
+
 @tailwind utilities;

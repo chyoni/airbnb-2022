@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       fontFamily: {
         ayuthaya: ["Ayuthaya"],
+        roboto: ["Roboto", "sans-serif"],
+        opensans: ["Open Sans", "sans-serif"],
+        sanspro: ["Source Sans Pro", "sans-serif"],
       },
     },
   },

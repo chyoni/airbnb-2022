@@ -273,3 +273,7 @@
 - #87 Design 7
 
   - font family
+
+- #88 Design 8
+
+  - login, signup screen
