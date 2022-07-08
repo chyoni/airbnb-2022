@@ -261,3 +261,7 @@
   - pass variable template to template
 
 - #84 Design 4
+
+- #85 Design 5
+
+  - room card done

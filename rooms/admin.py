@@ -25,6 +25,7 @@ class RoomAdmin(admin.ModelAdmin):
     # inlines는 admin안에 admin을 넣을 수 있는데 이게 가능한 이유는
     # room 안에 photo가 있다는 것을 우리 장고가 알기 때문에! (relationship)
     inlines = [PhotoInline]
+    ordering = ["-created"]
 
     fieldsets = [
         (

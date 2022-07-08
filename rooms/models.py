@@ -114,4 +114,5 @@ class Room(core_models.TimeStampedModel):
     def first_photo(self):
         # 이렇게 queryset array에서 첫번째거를 가져오고 싶다면 python 에서는 ,를 사용한다.
         (photo,) = self.photos.all()[:1]
+        print(photo)
         return photo.file.url
