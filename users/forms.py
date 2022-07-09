@@ -11,6 +11,9 @@ class LoginForm(forms.Form):
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
 
+        if email or password is None:
+            raise forms.ValidationError("This field is required")
+
         try:
             user = models.User.objects.get(email=email)
             if user.check_password(password):
