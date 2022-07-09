@@ -14,17 +14,19 @@
     <form class="w-10/12 flex-col flex items-center" method="POST" action="{% url 'users:signup' %}">
         {% csrf_token %}
 
-        
-        {{form.first_name.errors}}
         <input type="text" placeholder="First Name" class="basic_input mb-2" name="first_name" /> 
-        {{form.last_name.errors}}
+
         <input type="text" placeholder="Last_Name" class="basic_input mb-2" name="last_name" /> 
-        {{form.email.errors}}
+
         <input type="email" placeholder="Email Address" class="basic_input mb-2" name="email" /> 
-        {{form.password.errors}}
+        {% include 'partials/input_error.html' with field=form.email %}
+
         <input type="password" placeholder="Password" class="basic_input mb-2" name="password" />
-        {{form.password1.errors}}
+        {% include 'partials/input_error.html' with field=form.password %}
+        
         <input type="password" placeholder="Confirm Password" class="basic_input mb-2" name="password1" />  
+        {% include 'partials/input_error.html' with field=form.password1 %}
+        
         <button class="w-full px-8 py-3 border border-red-500 bg-red-500 bg-gradient-to-r from-red-400
                 rounded-md text-center text-white text-sm font-medium hover:bg-gradient-to-l hover:bg-red-300 transition-colors">
                 Sign up

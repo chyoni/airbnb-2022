@@ -281,3 +281,7 @@
 - #89 Design 9
 
   - login screen error message
+
+- #90 Design 10
+
+  - signup screen error message

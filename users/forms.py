@@ -11,7 +11,9 @@ class LoginForm(forms.Form):
         email = self.cleaned_data.get("email")
         password = self.cleaned_data.get("password")
 
-        if email or password is None:
+        if email is None:
+            raise forms.ValidationError("This field is required")
+        if password is None:
             raise forms.ValidationError("This field is required")
 
         try:
