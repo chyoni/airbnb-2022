@@ -285,3 +285,7 @@
 - #90 Design 10
 
   - signup screen error message
+
+- #91 Design 11
+
+  - message pop (https://docs.djangoproject.com/en/4.0/ref/contrib/messages/#message-tags)

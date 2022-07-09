@@ -1,10 +1,10 @@
-from doctest import UnexpectedException
 import os
 import requests
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.core.files.base import ContentFile
+from django.contrib import messages
 from . import forms, models
 
 
@@ -79,7 +79,10 @@ def github_login(request):
 
 
 class UserAlreadyExistException(Exception):
+    pass
 
+
+class SocialLoginException(Exception):
     pass
 
 
@@ -114,7 +117,9 @@ def github_callback(request):
                     try:
                         user = models.User.objects.get(email=email)
                         if user.login_method != models.User.LOGIN_GITHUB:
-                            raise UserAlreadyExistException()
+                            raise SocialLoginException(
+                                f"This email is already used social login for {user.login_method}"
+                            )
                     except models.User.DoesNotExist:
                         user = models.User.objects.create(
                             username=email,
@@ -127,19 +132,20 @@ def github_callback(request):
                         user.set_unusable_password()
                         user.save()
                     login(request, user)
+                    messages.success(request, "Login successful")
                     return redirect(reverse("core:home"))
                 else:
-                    raise UnexpectedException()
+                    raise SocialLoginException(
+                        "Github username is none. Please make sure your info agree"
+                    )
             elif response.json()["error"] is not None:
-                print(response.json()["error"])
-                raise UnexpectedException()
+                raise SocialLoginException(response.json()["error"])
             else:
-                raise UnexpectedException()
+                raise SocialLoginException("Unexpected error occured")
         else:
-            raise UnexpectedException()
-    except UnexpectedException:
-        return redirect(reverse("core:home"))
-    except UserAlreadyExistException:
+            raise SocialLoginException("Invalid redirect")
+    except SocialLoginException as socialError:
+        messages.error(request, socialError)
         return redirect(reverse("users:login"))
 
 
@@ -163,8 +169,7 @@ def kakao_callback(request):
             )
             error = response.json().get("error", None)
             if error is not None:
-                print(error)
-                raise UnexpectedException()
+                raise SocialLoginException(error)
             else:
                 access_token = response.json().get("access_token")
                 user = requests.get(
@@ -175,12 +180,15 @@ def kakao_callback(request):
                 nickname = user.json().get("nickname", None)
                 profile_image = user.json().get("picture", None)
                 if email is None:
-                    print("email required")
-                    raise UnexpectedException()
+                    raise SocialLoginException(
+                        "Make sure that agree kakao email info you haved"
+                    )
                 try:
                     kakao_user = models.User.objects.get(email=email)
                     if kakao_user.login_method != models.User.LOGIN_KAKAO:
-                        raise UserAlreadyExistException()
+                        raise SocialLoginException(
+                            f"This email is already used social login for {kakao_user.login_method}"
+                        )
                 except models.User.DoesNotExist:
                     kakao_user = models.User.objects.create(
                         email=email,
@@ -198,11 +206,10 @@ def kakao_callback(request):
                             f"{nickname}-avatar", ContentFile(k_profile.content)
                         )
                 login(request, kakao_user)
+                messages.success(request, "Login successful")
                 return redirect(reverse("core:home"))
         else:
-            raise UnexpectedException()
-    except UnexpectedException:
-        return redirect(reverse("core:home"))
-    except UserAlreadyExistException:
-        print("User with that email already exists")
+            raise SocialLoginException("Invalid redirect")
+    except SocialLoginException as socialError:
+        messages.error(request, socialError)
         return redirect(reverse("users:login"))
