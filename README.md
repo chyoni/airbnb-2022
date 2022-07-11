@@ -293,3 +293,9 @@
 - #92 Design 12
 
   - message fade in out
+
+- #93 UserProfileView
+
+  - Class based view
+  - function based로 하려니, 2개를 만들어야함 왜냐하면 내 프로필을 선택하는거랑 특정 유저를 클릭했을 때 그 유저를 가져오는 부분에서
+    장고가 기존에 context에 담은 유저를 가져와서 문제가 있음

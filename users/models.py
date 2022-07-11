@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.mail import send_mail
+from django.urls import reverse
 from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 
@@ -66,6 +67,10 @@ class User(AbstractUser):
     superhost = models.BooleanField(default=False)
     email_verified = models.BooleanField(default=False)
     email_secret = models.CharField(max_length=120, default="", blank=True)
+
+    # get_absolute_url은 장고 어드민 사이트에서 이 모델의 특정 레코드를 선택하면 우측 상단에 VIEW ON SITE 라는 버튼을 클릭하면 바로 해당 url로 리다이렉트 시켜준다.
+    def get_absolute_url(self):
+        return reverse("users:profile", kwargs={"pk": self.pk})
 
     def verify_email(self):
         if self.email_verified is False:

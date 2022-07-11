@@ -1,6 +1,7 @@
 import os
 import requests
 from django.shortcuts import render, redirect
+from django.views.generic.detail import DetailView
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.core.files.base import ContentFile
@@ -214,3 +215,10 @@ def kakao_callback(request):
     except SocialLoginException as socialError:
         messages.error(request, socialError)
         return redirect(reverse("users:login"))
+
+
+class UserProfileView(DetailView):
+
+    model = models.User
+    template_name = "users/detail.html"
+    context_object_name = "user_obj"

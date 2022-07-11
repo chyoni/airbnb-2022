@@ -1,6 +1,7 @@
 <ul class="flex items-center text-sm font-medium space-x-5">  
     {% if user.is_authenticated %}
-      <li class="nav_link"><a href="{% url 'users:logout' %}">Logout</a></li>
+      <a href="{% url 'users:profile' user.pk %}" class="text-[20px]"><i class="fa-solid fa-lg text-red-500 fa-circle-user"></i></a>
+      <a href="{% url 'users:logout' %}" class="text-[20px]"><i class="fa-solid fa-lg text-red-500 fa-right-from-bracket"></i></a>
     {% else %}
       <li class="nav_link"><a href="{% url 'users:login' %}">Login</a></li>
       <li class="nav_link"><a href="{% url 'users:signup'  %}">Signup</a></li>
