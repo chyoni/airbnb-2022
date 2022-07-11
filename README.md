@@ -289,3 +289,7 @@
 - #91 Design 11
 
   - message pop (https://docs.djangoproject.com/en/4.0/ref/contrib/messages/#message-tags)
+
+- #92 Design 12
+
+  - message fade in out

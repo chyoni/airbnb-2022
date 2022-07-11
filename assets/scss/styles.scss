@@ -19,12 +19,51 @@
     }
 }
 
+@keyframes messageFadeInOut {
+    0% {
+        opacity: 0;
+    }
+    2% {
+        opacity: .5;
+    }
+    5% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+}
+
 .custom-animate-pulse {
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) 3;
 }
 
 .has_error {
     @apply border-red-500 transition-colors custom-animate-pulse
+}
+
+.message_container {
+    animation: messageFadeInOut 4s ease-in-out forwards;
+}
+
+.message {
+    animation: messageFadeInOut 4s ease-in-out forwards;
+    &.error {
+        @apply bg-red-500 text-white;
+    }
+    &.success {
+        @apply bg-green-500 text-white;
+    }
+    &.info {
+        @apply bg-blue-500 text-white;
+    }
+    &.warning {
+        @apply bg-yellow-400 text-black;
+    }
 }
 
 @tailwind utilities;
