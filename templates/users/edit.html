@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock title %}
+
+{% block search-bar %}{% endblock search-bar %}
+
+{% block content %}
+<div class="xl:max-w-xl container mx-auto mt-40 flex items-center justify-center flex-col border border-gray-300 p-10">
+    <div class="w-full flex items-center justify-center">
+    {% if user.avatar %}
+        <div class="rounded-full w-32 h-32 bg-center bg-cover" style="background-image:url({{user.avatar.url}});"></div>
+    {% else %}
+        <div class="bg-gray-500 rounded-full w-32 h-32 flex items-center justify-center">
+            <span class="text-white font-medium text-3xl">{{user.first_name|first}}</span>
+        </div>
+    {% endif %}
+    </div>
+</div>
+{% endblock content %}

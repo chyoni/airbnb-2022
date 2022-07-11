@@ -224,8 +224,16 @@ class UserProfileView(DetailView):
     context_object_name = "user_obj"
 
 
-def editProfile(request):
-    pass
+def editProfile(request, pk):
+    try:
+        if request.user.pk != pk:
+            pass
+            # To do: unauthorized screen
+
+        user = models.User.objects.get(pk=pk)
+        return render(request, "users/edit.html", {"user": user})
+    except models.User.DoesNotExist:
+        pass
 
 
 def usersListings(request):
