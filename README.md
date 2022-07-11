@@ -307,3 +307,7 @@
 - #95 Design 14
 
   - User profile 2
+
+- #96 Design 15
+
+  - User profile 3

@@ -222,3 +222,11 @@ class UserProfileView(DetailView):
     model = models.User
     template_name = "users/detail.html"
     context_object_name = "user_obj"
+
+
+def editProfile(request):
+    pass
+
+
+def usersListings(request):
+    pass
