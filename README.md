@@ -303,3 +303,7 @@
 - #94 Design 13
 
   - User profile position
+
+- #95 Design 14
+
+  - User profile 2
