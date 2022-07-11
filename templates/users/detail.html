@@ -3,5 +3,25 @@
 {% block title %}{{user_obj.username}}'s Profile{% endblock title %}
 
 {% block content %}
-    <h1>hi</h1>
+    <div class="xl:max-w-full mt-32 container flex items-center justify-center">
+        <div class="border border-gray-300 ml-10 rounded-2xl w-1/3 max-w-3xl py-10">
+            {% if user_obj.avatar %}
+                <div class="rounded-full w-32 h-32 bg-center bg-cover" style="background-image:url({{user_obj.avatar.url}});"></div>
+            {% else %}
+                <div class="bg-gray-500 rounded-full w-32 h-32 flex items-center justify-center">
+                    <span class="text-white font-medium text-3xl">{{user_obj.first_name|first}}</span>
+                </div>
+            {% endif %}
+
+            
+            {% if user_obj.first_name %}
+                <span>{{user_obj.first_name}}</span>
+            {% else %}
+                <span>{{user_obj.username}}</span>
+            {% endif %}
+        </div>
+        <div class="w-2/3 border ml-10 border-red-500 mr-10 py-24">
+
+        </div>
+    </div>
 {% endblock content %}
