@@ -225,26 +225,38 @@ class UserProfileView(DetailView):
 
 
 def editProfile(request, pk):
-    if request.method == "GET":
-        try:
+
+    language = models.User.LANGUAGE_CHOICES
+    currency = models.User.CURRENCY_CHOICES
+
+    try:
+        user = models.User.objects.get(pk=pk)
+
+        if request.method == "GET":
             if request.user.pk != pk:
                 pass
                 # To do: unauthorized screen
 
-            user = models.User.objects.get(pk=pk)
-            language = models.User.LANGUAGE_CHOICES
-            currency = models.User.CURRENCY_CHOICES
-            return render(
-                request,
-                "users/edit.html",
-                {"user": user, "language": language, "currency": currency},
-            )
-        except models.User.DoesNotExist:
-            pass
+        if request.method == "POST":
+            form = forms.EditForm(request.POST)
 
-    if request.method == "POST":
+            if form.is_valid():
+                print(form.cleaned_data)
+                return redirect(reverse("core:home"))
+
+    except models.User.DoesNotExist:
         pass
+
+    return render(
+        request,
+        "users/edit.html",
+        {"user": user, "language": language, "currency": currency},
+    )
 
 
 def usersListings(request):
+    pass
+
+
+def userChangePassword(request):
     pass

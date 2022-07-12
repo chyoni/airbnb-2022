@@ -61,3 +61,23 @@ class SignupForm(forms.Form):
         user.first_name = first_name
         user.last_name = last_name
         user.save()
+
+
+class EditForm(forms.Form):
+
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+    bio = forms.CharField(widget=forms.Textarea)
+    language = forms.ChoiceField(
+        widget=forms.Select, choices=models.User.LANGUAGE_CHOICES
+    )
+    currency = forms.ChoiceField(
+        widget=forms.Select, choices=models.User.CURRENCY_CHOICES
+    )
+
+    def clean_first_name(self):
+        set_first_name = self.cleaned_data["first_name"]
+        if "".__eq__(set_first_name):
+            raise forms.ValidationError("First name is required.")
+        else:
+            return set_first_name

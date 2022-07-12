@@ -5,7 +5,7 @@
 {% block search-bar %}{% endblock search-bar %}
 
 {% block content %}
-<div class="xl:max-w-xl container mx-auto mt-40 flex items-center justify-center flex-col border border-gray-300 p-10">
+<div class="xl:max-w-xl container mx-auto mt-40 flex items-center justify-center flex-col border border-gray-300 p-10 rounded-lg">
     <form method="POST" class="w-full flex flex-col items-center justify-center space-y-5">
         {% csrf_token %}
         {% if user.avatar %}
@@ -56,5 +56,11 @@
 
         <button class="basic_button text-gray-800 border border-gray-800">Edit</button>
     </form>
+
+    <div class="mt-10">
+        <span class="text-red-500 font-semibold text-base underline">
+            <a href="{% url 'users:change-password' %}">Change Password</a>
+        </span>
+    </div>
 </div>
 {% endblock content %}
