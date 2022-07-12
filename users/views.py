@@ -225,14 +225,24 @@ class UserProfileView(DetailView):
 
 
 def editProfile(request, pk):
-    try:
-        if request.user.pk != pk:
-            pass
-            # To do: unauthorized screen
+    if request.method == "GET":
+        try:
+            if request.user.pk != pk:
+                pass
+                # To do: unauthorized screen
 
-        user = models.User.objects.get(pk=pk)
-        return render(request, "users/edit.html", {"user": user})
-    except models.User.DoesNotExist:
+            user = models.User.objects.get(pk=pk)
+            language = models.User.LANGUAGE_CHOICES
+            currency = models.User.CURRENCY_CHOICES
+            return render(
+                request,
+                "users/edit.html",
+                {"user": user, "language": language, "currency": currency},
+            )
+        except models.User.DoesNotExist:
+            pass
+
+    if request.method == "POST":
         pass
 
 

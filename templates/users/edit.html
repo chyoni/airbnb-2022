@@ -6,14 +6,55 @@
 
 {% block content %}
 <div class="xl:max-w-xl container mx-auto mt-40 flex items-center justify-center flex-col border border-gray-300 p-10">
-    <div class="w-full flex items-center justify-center">
-    {% if user.avatar %}
-        <div class="rounded-full w-32 h-32 bg-center bg-cover" style="background-image:url({{user.avatar.url}});"></div>
-    {% else %}
-        <div class="bg-gray-500 rounded-full w-32 h-32 flex items-center justify-center">
-            <span class="text-white font-medium text-3xl">{{user.first_name|first}}</span>
+    <form method="POST" class="w-full flex flex-col items-center justify-center space-y-5">
+        {% csrf_token %}
+        {% if user.avatar %}
+            <div class="rounded-full w-32 h-32 bg-center bg-cover" style="background-image:url({{user.avatar.url}});"></div>
+        {% else %}
+            <div class="bg-gray-500 rounded-full w-32 h-32 flex items-center justify-center">
+                <span class="text-white font-medium text-3xl">{{user.first_name|first}}</span>
+            </div>
+        {% endif %}
+        
+        <div class="flex w-full flex-col space-y-2">
+            <label for="first_name" class="font-semibold">First Name</label>
+            <input id="first_name" class="basic_input" placeholder="First Name" name="first_name" value="{{user.first_name}}" />
         </div>
-    {% endif %}
-    </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="last_name" class="font-semibold">Last Name</label>
+            <input id="last_name" class="basic_input" placeholder="Last Name" name="last_name" value="{{user.last_name}}" />
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="bio" class="font-semibold">Bio</label>
+            <textarea id="bio" name="bio" class="basic_input" placeholder="Bio"></textarea>
+        </div>
+        
+        <div class="flex w-full flex-col space-y-2">
+            <label for="language" class="font-semibold">Language</label>
+            <select name="language" id="language" class="basic_input">
+                {% for db, full in language %}
+                    <option value="{{db}}" {% if db == user.language %}selected{% endif %}>
+                        {{full}}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="currency" class="font-semibold">Currency</label>
+            <select name="currency" id="currency" class="basic_input">
+                {% for db, full in currency %}
+                    <option value="{{db}}" {% if db == user.currency %}selected{% endif %}>
+                        {{full}}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+        <button class="basic_button text-gray-800 border border-gray-800">Edit</button>
+    </form>
 </div>
 {% endblock content %}
