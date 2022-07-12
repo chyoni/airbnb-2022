@@ -18,22 +18,24 @@
         
         <div class="flex w-full flex-col space-y-2">
             <label for="first_name" class="font-semibold">First Name</label>
-            <input id="first_name" class="basic_input" placeholder="First Name" name="first_name" value="{{user.first_name}}" />
+            <input id="first_name" class="basic_input {% if form.first_name.errors %}has_error{% endif %}" placeholder="First Name" name="first_name" value="{{user.first_name}}" />
+            {% include 'partials/input_error.html' with field=form.first_name %}
         </div>
 
         <div class="flex w-full flex-col space-y-2">
             <label for="last_name" class="font-semibold">Last Name</label>
-            <input id="last_name" class="basic_input" placeholder="Last Name" name="last_name" value="{{user.last_name}}" />
+            <input id="last_name" class="basic_input {% if form.last_name.errors %}has_error{% endif %}" placeholder="Last Name" name="last_name" value="{{user.last_name}}" />
+            {% include 'partials/input_error.html' with field=form.last_name %}
         </div>
 
         <div class="flex w-full flex-col space-y-2">
             <label for="bio" class="font-semibold">Bio</label>
-            <textarea id="bio" name="bio" class="basic_input" placeholder="Bio"></textarea>
+            <textarea id="bio" name="bio" class="basic_input {% if form.bio.errors %}has_error{% endif %}" placeholder="Bio"></textarea>
         </div>
         
         <div class="flex w-full flex-col space-y-2">
             <label for="language" class="font-semibold">Language</label>
-            <select name="language" id="language" class="basic_input">
+            <select name="language" id="language" class="basic_input {% if form.language.errors %}has_error{% endif %}">
                 {% for db, full in language %}
                     <option value="{{db}}" {% if db == user.language %}selected{% endif %}>
                         {{full}}
@@ -44,7 +46,7 @@
 
         <div class="flex w-full flex-col space-y-2">
             <label for="currency" class="font-semibold">Currency</label>
-            <select name="currency" id="currency" class="basic_input">
+            <select name="currency" id="currency" class="basic_input {% if form.currency.errors %}has_error{% endif %}">
                 {% for db, full in currency %}
                     <option value="{{db}}" {% if db == user.currency %}selected{% endif %}>
                         {{full}}

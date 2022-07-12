@@ -67,7 +67,7 @@ class EditForm(forms.Form):
 
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
-    bio = forms.CharField(widget=forms.Textarea)
+    bio = forms.CharField(widget=forms.Textarea, required=False)
     language = forms.ChoiceField(
         widget=forms.Select, choices=models.User.LANGUAGE_CHOICES
     )
@@ -81,3 +81,13 @@ class EditForm(forms.Form):
             raise forms.ValidationError("First name is required.")
         else:
             return set_first_name
+
+    def clean_last_name(self):
+        set_last_name = self.cleaned_data["last_name"]
+        if "".__eq__(set_last_name):
+            raise forms.ValidationError("Last name is required.")
+        else:
+            return set_last_name
+
+    def save(self):
+        pass

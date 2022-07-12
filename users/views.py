@@ -236,22 +236,33 @@ def editProfile(request, pk):
             if request.user.pk != pk:
                 pass
                 # To do: unauthorized screen
-
+            return render(
+                request,
+                "users/edit.html",
+                {
+                    "current_user": user,
+                    "language": language,
+                    "currency": currency,
+                },
+            )
         if request.method == "POST":
             form = forms.EditForm(request.POST)
 
             if form.is_valid():
                 print(form.cleaned_data)
-                return redirect(reverse("core:home"))
 
+            print(form.cleaned_data)
+            return render(
+                request,
+                "users/edit.html",
+                {
+                    "form": form,
+                    "language": language,
+                    "currency": currency,
+                },
+            )
     except models.User.DoesNotExist:
         pass
-
-    return render(
-        request,
-        "users/edit.html",
-        {"user": user, "language": language, "currency": currency},
-    )
 
 
 def usersListings(request):
