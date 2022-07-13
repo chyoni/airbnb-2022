@@ -249,9 +249,8 @@ def editProfile(request, pk):
             form = forms.EditForm(request.POST)
 
             if form.is_valid():
-                print(form.cleaned_data)
-
-            print(form.cleaned_data)
+                form.save(user=user)
+                return redirect(reverse("users:edit-profile", kwargs={"pk": user.pk}))
             return render(
                 request,
                 "users/edit.html",

@@ -69,10 +69,10 @@ class EditForm(forms.Form):
     last_name = forms.CharField(required=True)
     bio = forms.CharField(widget=forms.Textarea, required=False)
     language = forms.ChoiceField(
-        widget=forms.Select, choices=models.User.LANGUAGE_CHOICES
+        widget=forms.Select, choices=models.User.LANGUAGE_CHOICES, required=True
     )
     currency = forms.ChoiceField(
-        widget=forms.Select, choices=models.User.CURRENCY_CHOICES
+        widget=forms.Select, choices=models.User.CURRENCY_CHOICES, required=True
     )
 
     def clean_first_name(self):
@@ -89,5 +89,25 @@ class EditForm(forms.Form):
         else:
             return set_last_name
 
-    def save(self):
-        pass
+    def save(self, user):
+        first_name = self.cleaned_data["first_name"]
+        last_name = self.cleaned_data["last_name"]
+        bio = self.cleaned_data["bio"]
+        language = self.cleaned_data["language"]
+        currency = self.cleaned_data["currency"]
+
+        user = models.User.objects.filter(pk=user.pk).update(
+            first_name=first_name,
+            last_name=last_name,
+            bio=bio,
+            language=language,
+            currency=currency,
+        )
+
+        # user.first_name = first_name
+        # user.last_name = last_name
+        # user.bio = bio
+        # user.language = language
+        # user.currency = currency
+
+        # user.save()

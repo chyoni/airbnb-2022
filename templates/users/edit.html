@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Login{% endblock title %}
+{% block title %}Edit{% endblock title %}
 
 {% block search-bar %}{% endblock search-bar %}
 
@@ -8,51 +8,53 @@
 <div class="xl:max-w-xl container mx-auto mt-40 flex items-center justify-center flex-col border border-gray-300 p-10 rounded-lg">
     <form method="POST" class="w-full flex flex-col items-center justify-center space-y-5">
         {% csrf_token %}
-        {% if user.avatar %}
-            <div class="rounded-full w-32 h-32 bg-center bg-cover" style="background-image:url({{user.avatar.url}});"></div>
+        {% if current_user.avatar %}
+            <div class="rounded-full w-32 h-32 bg-center bg-cover" style="background-image:url({{current_user.avatar.url}});"></div>
         {% else %}
             <div class="bg-gray-500 rounded-full w-32 h-32 flex items-center justify-center">
-                <span class="text-white font-medium text-3xl">{{user.first_name|first}}</span>
+                <span class="text-white font-medium text-3xl">{{current_user.first_name|first}}</span>
             </div>
         {% endif %}
         
         <div class="flex w-full flex-col space-y-2">
             <label for="first_name" class="font-semibold">First Name</label>
-            <input id="first_name" class="basic_input {% if form.first_name.errors %}has_error{% endif %}" placeholder="First Name" name="first_name" value="{{user.first_name}}" />
+            <input id="first_name" class="basic_input {% if form.first_name.errors %}has_error{% endif %}" placeholder="First Name" name="first_name" value="{{current_user.first_name}}" />
             {% include 'partials/input_error.html' with field=form.first_name %}
         </div>
 
         <div class="flex w-full flex-col space-y-2">
             <label for="last_name" class="font-semibold">Last Name</label>
-            <input id="last_name" class="basic_input {% if form.last_name.errors %}has_error{% endif %}" placeholder="Last Name" name="last_name" value="{{user.last_name}}" />
+            <input id="last_name" class="basic_input {% if form.last_name.errors %}has_error{% endif %}" placeholder="Last Name" name="last_name" value="{{current_user.last_name}}" />
             {% include 'partials/input_error.html' with field=form.last_name %}
         </div>
 
         <div class="flex w-full flex-col space-y-2">
             <label for="bio" class="font-semibold">Bio</label>
-            <textarea id="bio" name="bio" class="basic_input {% if form.bio.errors %}has_error{% endif %}" placeholder="Bio"></textarea>
+            <textarea id="bio" name="bio" class="basic_input {% if form.bio.errors %}has_error{% endif %}" placeholder="Bio">{{current_user.bio}}</textarea>
         </div>
         
         <div class="flex w-full flex-col space-y-2">
             <label for="language" class="font-semibold">Language</label>
             <select name="language" id="language" class="basic_input {% if form.language.errors %}has_error{% endif %}">
                 {% for db, full in language %}
-                    <option value="{{db}}" {% if db == user.language %}selected{% endif %}>
+                    <option value="{{db}}" {% if db == current_user.language %}selected{% endif %}>
                         {{full}}
                     </option>
                 {% endfor %}
             </select>
+            {% include 'partials/input_error.html' with field=form.language %}
         </div>
 
         <div class="flex w-full flex-col space-y-2">
             <label for="currency" class="font-semibold">Currency</label>
             <select name="currency" id="currency" class="basic_input {% if form.currency.errors %}has_error{% endif %}">
                 {% for db, full in currency %}
-                    <option value="{{db}}" {% if db == user.currency %}selected{% endif %}>
+                    <option value="{{db}}" {% if db == current_user.currency %}selected{% endif %}>
                         {{full}}
                     </option>
                 {% endfor %}
             </select>
+            {% include 'partials/input_error.html' with field=form.currency %}
         </div>
 
 
