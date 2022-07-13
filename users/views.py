@@ -246,11 +246,12 @@ def editProfile(request, pk):
                 },
             )
         if request.method == "POST":
-            form = forms.EditForm(request.POST)
+            form = forms.EditForm(request.POST, request.FILES)
 
             if form.is_valid():
                 form.save(user=user)
                 return redirect(reverse("users:profile", kwargs={"pk": user.pk}))
+
             return render(
                 request,
                 "users/edit.html",

@@ -66,6 +66,7 @@ class SignupForm(forms.Form):
 class EditForm(forms.Form):
 
     first_name = forms.CharField(required=True)
+    avatar = forms.ImageField()
     last_name = forms.CharField(required=True)
     bio = forms.CharField(widget=forms.Textarea, required=False)
     language = forms.ChoiceField(
@@ -95,11 +96,15 @@ class EditForm(forms.Form):
         bio = self.cleaned_data["bio"]
         language = self.cleaned_data["language"]
         currency = self.cleaned_data["currency"]
+        avatar = self.cleaned_data["avatar"]
 
-        user = models.User.objects.filter(pk=user.pk).update(
+        models.User.objects.filter(pk=user.pk).update(
             first_name=first_name,
             last_name=last_name,
             bio=bio,
             language=language,
             currency=currency,
         )
+
+        updated_user = models.User.objects.get(pk=user.pk)
+        updated_user.avatar.save(f"{updated_user.first_name}-avatar", avatar.file)

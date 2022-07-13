@@ -331,3 +331,5 @@
 - #102 Design 20
 
   - User avatar input
+
+- #103 User avatar update done
