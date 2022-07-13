@@ -108,3 +108,31 @@ class EditForm(forms.Form):
 
         updated_user = models.User.objects.get(pk=user.pk)
         updated_user.avatar.save(f"{updated_user.first_name}-avatar", avatar.file)
+
+
+class PasswordChangeForm(forms.Form):
+
+    current_password = forms.CharField(widget=forms.PasswordInput)
+    new_password = forms.CharField(widget=forms.PasswordInput)
+    new_confirm_password = forms.CharField(widget=forms.PasswordInput)
+
+    def clean_new_confirm_password(self):
+
+        new_password = self.cleaned_data["new_password"]
+        new_confirm_password = self.cleaned_data["new_confirm_password"]
+
+        if new_password != new_confirm_password:
+            raise forms.ValidationError(
+                "New password and Confirm password has incorrect value"
+            )
+        return new_password
+
+    def save(self, user):
+
+        current_password = self.cleaned_data["current_password"]
+
+        if user.check_password(current_password) is False:
+            self.add_error("current_password", "Current password is wrong")
+
+        user.set_password(self.cleaned_data["new_password"])
+        user.save()

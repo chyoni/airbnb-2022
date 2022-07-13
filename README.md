@@ -333,3 +333,5 @@
   - User avatar input
 
 - #103 User avatar update done
+
+- #104 Password change done

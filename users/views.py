@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.core.files.base import ContentFile
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from . import forms, models
 
 
@@ -269,5 +270,18 @@ def usersListings(request):
     pass
 
 
+@login_required
 def changePassword(request):
-    pass
+
+    if request.method == "GET":
+
+        form = forms.PasswordChangeForm()
+        return render(request, "users/change_password.html", {"form": form})
+
+    if request.method == "POST":
+
+        form = forms.PasswordChangeForm(request.POST)
+
+        if form.is_valid():
+            form.save(user=request.user)
+        return render(request, "users/change_password.html", {"form": form})

@@ -26,11 +26,12 @@
     2% {
         opacity: .5;
     }
-    5% {
+    3% {
         opacity: 1;
     }
     95% {
         opacity: 1;
+        transform: translateY(-80px);
     }
     100% {
         opacity: 0;
@@ -47,11 +48,11 @@
 }
 
 .message_container {
-    animation: messageFadeInOut 4s ease-in-out forwards;
+    animation: messageFadeInOut 3s ease-in-out forwards;
 }
 
 .message {
-    animation: messageFadeInOut 4s ease-in-out forwards;
+    animation: messageFadeInOut 3s ease-in-out forwards;
     &.error {
         @apply bg-red-500 text-white;
     }
