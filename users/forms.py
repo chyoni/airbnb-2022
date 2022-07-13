@@ -103,11 +103,3 @@ class EditForm(forms.Form):
             language=language,
             currency=currency,
         )
-
-        # user.first_name = first_name
-        # user.last_name = last_name
-        # user.bio = bio
-        # user.language = language
-        # user.currency = currency
-
-        # user.save()

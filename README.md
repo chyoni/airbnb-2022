@@ -327,3 +327,7 @@
 - #100 Design 19
 
 - #101 User update views
+
+- #102 Design 20
+
+  - User avatar input

@@ -250,7 +250,7 @@ def editProfile(request, pk):
 
             if form.is_valid():
                 form.save(user=user)
-                return redirect(reverse("users:edit-profile", kwargs={"pk": user.pk}))
+                return redirect(reverse("users:profile", kwargs={"pk": user.pk}))
             return render(
                 request,
                 "users/edit.html",
@@ -268,5 +268,5 @@ def usersListings(request):
     pass
 
 
-def userChangePassword(request):
+def changePassword(request):
     pass

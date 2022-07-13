@@ -6,15 +6,21 @@
 
 {% block content %}
 <div class="xl:max-w-xl container mx-auto mt-40 flex items-center justify-center flex-col border border-gray-300 p-10 rounded-lg">
-    <form method="POST" class="w-full flex flex-col items-center justify-center space-y-5">
+    <form method="POST" class="w-full flex flex-col items-center justify-center space-y-5" enctype="multipart/form-data">
         {% csrf_token %}
-        {% if current_user.avatar %}
-            <div class="rounded-full w-32 h-32 bg-center bg-cover" style="background-image:url({{current_user.avatar.url}});"></div>
-        {% else %}
-            <div class="bg-gray-500 rounded-full w-32 h-32 flex items-center justify-center">
-                <span class="text-white font-medium text-3xl">{{current_user.first_name|first}}</span>
-            </div>
-        {% endif %}
+        <div class="w-full flex items-center justify-center">
+            <label for="avatar" class="cursor-pointer border-2 border-red-400 hover:border-red-200 transition-colors rounded-full">
+                {% if current_user.avatar %}
+                    <div class="rounded-full w-32 h-32 bg-center bg-cover" style="background-image:url({{current_user.avatar.url}});"></div>
+                {% else %}
+                    <div class="bg-gray-500 rounded-full w-32 h-32 flex items-center justify-center">
+                        <span class="text-white font-medium text-3xl">{{current_user.first_name|first}}</span>
+                    </div>
+                {% endif %}
+                <input type="file" id="avatar" hidden accept="image/*" />
+            </label>
+        </div>
+
         
         <div class="flex w-full flex-col space-y-2">
             <label for="first_name" class="font-semibold">First Name</label>
