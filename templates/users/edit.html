@@ -73,10 +73,12 @@
         <button class="basic_button text-gray-800 border border-gray-800">Edit</button>
     </form>
 
-    <div class="mt-10">
-        <span class="text-red-500 font-semibold text-base underline">
-            <a href="{% url 'users:change-password' %}">Change Password</a>
-        </span>
-    </div>
+    {% if user.login_method == "email" %}
+        <div class="mt-10">
+            <span class="text-red-500 font-semibold text-base underline">
+                <a href="{% url 'users:change-password' %}">Change Password</a>
+            </span>
+        </div>
+    {% endif %}
 </div>
 {% endblock content %}

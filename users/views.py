@@ -6,11 +6,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.core.files.base import ContentFile
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from . import forms, models
 
 
 def login_user(request):
+
+    if request.user.is_anonymous is False:
+        return redirect(reverse("core:home"))
 
     if request.method == "GET":
         form = forms.LoginForm()
@@ -31,11 +33,17 @@ def login_user(request):
 
 
 def logout_user(request):
+    if request.user.is_anonymous is True:
+        return redirect(reverse("core:home"))
+
     logout(request)
     return redirect(reverse("core:home"))
 
 
 def signup(request):
+
+    if request.user.is_anonymous is False:
+        return redirect(reverse("core:home"))
 
     if request.method == "GET":
         form = forms.SignupForm()
@@ -227,6 +235,9 @@ class UserProfileView(DetailView):
 
 def editProfile(request, pk):
 
+    if request.user.is_anonymous is True:
+        return redirect(reverse("core:home"))
+
     language = models.User.LANGUAGE_CHOICES
     currency = models.User.CURRENCY_CHOICES
 
@@ -270,8 +281,10 @@ def usersListings(request):
     pass
 
 
-@login_required
 def changePassword(request):
+
+    if request.user.is_anonymous is True:
+        return redirect(reverse("core:home"))
 
     if request.method == "GET":
 

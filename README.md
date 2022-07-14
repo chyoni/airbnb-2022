@@ -335,3 +335,5 @@
 - #103 User avatar update done
 
 - #104 Password change done
+
+- #105 Set permission to each screen
