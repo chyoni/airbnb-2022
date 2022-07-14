@@ -337,3 +337,5 @@
 - #104 Password change done
 
 - #105 Set permission to each screen
+
+- #106 Login required decorator

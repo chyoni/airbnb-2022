@@ -1,17 +1,18 @@
 import os
 import requests
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic.detail import DetailView
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.core.files.base import ContentFile
 from django.contrib import messages
-from . import forms, models
+from . import forms, models, mixins
 
 
 def login_user(request):
 
-    if request.user.is_anonymous is False:
+    if mixins.isLoggedIn(request) is True:
         return redirect(reverse("core:home"))
 
     if request.method == "GET":
@@ -28,21 +29,22 @@ def login_user(request):
             if user is not None:
                 login(request, user=user)
                 messages.success(request, "Login Successful")
+                nxt = request.META.get("HTTP_REFERER").split("next=/")[1]
+                if nxt is not None:
+                    return redirect("%s/%s" % (request.META.get("HTTP_ORIGIN"), nxt))
                 return redirect(reverse("core:home"))
         return render(request, "users/login.html", context={"form": form})
 
 
+@login_required(login_url="/users/login")
 def logout_user(request):
-    if request.user.is_anonymous is True:
-        return redirect(reverse("core:home"))
-
     logout(request)
     return redirect(reverse("core:home"))
 
 
 def signup(request):
 
-    if request.user.is_anonymous is False:
+    if mixins.isLoggedIn(request) is True:
         return redirect(reverse("core:home"))
 
     if request.method == "GET":
@@ -233,9 +235,10 @@ class UserProfileView(DetailView):
     context_object_name = "user_obj"
 
 
+@login_required(login_url="/users/login")
 def editProfile(request, pk):
 
-    if request.user.is_anonymous is True:
+    if mixins.isLoggedIn(request) is False:
         return redirect(reverse("core:home"))
 
     language = models.User.LANGUAGE_CHOICES
@@ -281,10 +284,8 @@ def usersListings(request):
     pass
 
 
+@login_required(login_url="/users/login")
 def changePassword(request):
-
-    if request.user.is_anonymous is True:
-        return redirect(reverse("core:home"))
 
     if request.method == "GET":
 
