@@ -13,6 +13,7 @@ from . import forms, models, mixins
 def login_user(request):
 
     if mixins.isLoggedIn(request) is True:
+        messages.error(request, "You already log in")
         return redirect(reverse("core:home"))
 
     if request.method == "GET":
@@ -36,7 +37,6 @@ def login_user(request):
         return render(request, "users/login.html", context={"form": form})
 
 
-@login_required(login_url="/users/login")
 def logout_user(request):
     logout(request)
     return redirect(reverse("core:home"))
@@ -45,6 +45,7 @@ def logout_user(request):
 def signup(request):
 
     if mixins.isLoggedIn(request) is True:
+        messages.error("You already log in")
         return redirect(reverse("core:home"))
 
     if request.method == "GET":
@@ -237,9 +238,6 @@ class UserProfileView(DetailView):
 
 @login_required(login_url="/users/login")
 def editProfile(request, pk):
-
-    if mixins.isLoggedIn(request) is False:
-        return redirect(reverse("core:home"))
 
     language = models.User.LANGUAGE_CHOICES
     currency = models.User.CURRENCY_CHOICES
