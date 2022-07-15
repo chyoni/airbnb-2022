@@ -16,13 +16,7 @@
 
         <div class="w-full flex items-center justify-center">
             <label for="avatar" class="cursor-pointer border-2 border-red-400 hover:border-red-200 transition-colors rounded-full">
-                {% if user.avatar %}
-                    <div class="rounded-full w-32 h-32 bg-center bg-cover" style="background-image:url({{user.avatar.url}});"></div>
-                {% else %}
-                    <div class="bg-gray-500 rounded-full w-32 h-32 flex items-center justify-center">
-                        <span class="text-white font-medium text-3xl">{{user.first_name|first}}</span>
-                    </div>
-                {% endif %}
+                {% include 'partials/user_avatar.html' with user=user %}
                 <input type="file" id="avatar" hidden accept="image/*" name="avatar" />
             </label>
         </div>

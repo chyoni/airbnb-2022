@@ -341,3 +341,5 @@
 - #106 Login required decorator
 
 - #107 Room detail 1
+
+- #108 Room detail 2

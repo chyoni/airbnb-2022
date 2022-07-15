@@ -14,13 +14,7 @@
                     </div>
                 {% endif %}
                 <div class="w-full flex items-center justify-center">
-                {% if user_obj.avatar %}
-                    <div class="rounded-full w-32 h-32 bg-center bg-cover" style="background-image:url({{user_obj.avatar.url}});"></div>
-                {% else %}
-                    <div class="bg-gray-500 rounded-full w-32 h-32 flex items-center justify-center">
-                        <span class="text-white font-medium text-3xl">{{user_obj.first_name|first}}</span>
-                    </div>
-                {% endif %}
+                {% include 'partials/user_avatar.html' with user=user_obj %}
                 </div>
 
                 <div class="w-full flex flex-col mt-10 space-y-3">
