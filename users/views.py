@@ -30,8 +30,9 @@ def login_user(request):
             if user is not None:
                 login(request, user=user)
                 messages.success(request, "Login Successful")
-                nxt = request.META.get("HTTP_REFERER").split("next=/")[1]
-                if nxt is not None:
+                isNext = request.META.get("HTTP_REFERER").__contains__("next")
+                if isNext:
+                    nxt = request.META.get("HTTP_REFERER").split("next=/")[1]
                     return redirect("%s/%s" % (request.META.get("HTTP_ORIGIN"), nxt))
                 return redirect(reverse("core:home"))
         return render(request, "users/login.html", context={"form": form})

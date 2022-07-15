@@ -339,3 +339,5 @@
 - #105 Set permission to each screen
 
 - #106 Login required decorator
+
+- #107 Room detail 1
