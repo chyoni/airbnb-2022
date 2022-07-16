@@ -21,16 +21,76 @@
                     <span class="text-xl font-semibold text-gray-800">{{room.name}}</span>
                     <span class="text-sm font-semibold text-gray-500">{{room.city}}</span>
                     <div class="space-x-2">
-                        <span class="text-base font-medium text-gray-700">{{room.guests}} {% if room.guests == 1 %}guest{% else %}guests{% endif %}</span>
-                        <span class="text-base font-medium text-gray-700">{{room.bedrooms}} {% if room.bedrooms == 1 %}bedroom{% else %}bedrooms{% endif %}</span>
-                        <span class="text-base font-medium text-gray-700">{{room.beds}} {% if room.beds == 1 %}bed{% else %}beds{% endif %}</span>
-                        <span class="text-base font-medium text-gray-700">{{room.baths}} {% if room.baths == 1 %}bath{% else %}baths{% endif %}</span>
+                        <span class="text-base font-medium text-gray-700">{{room.guests}} guest{{room.guests|pluralize}}</span>
+                        <span class="text-base font-medium text-gray-700">{{room.bedrooms}} bedroom{{room.bedrooms|pluralize}}</span>
+                        <span class="text-base font-medium text-gray-700">{{room.beds}} bed{{room.beds|pluralize}}</span>
+                        <span class="text-base font-medium text-gray-700">{{room.baths}} bath{{room.baths|pluralize}}</span>
                     </div>
                 </div>
                 <a href="{{room.host.get_absolute_url}}">
                     {% include 'partials/user_avatar.html' with user=room.host %}
                 </a>
             </div>
+
+            <div class="py-12 w-full border-b border-gray-300">
+                <p class="text-sm font-medium text-gray-800">{{room.description}}</p>
+            </div>
+
+            <div class="py-12 w-full border-b border-gray-300 flex flex-col">
+                <span class="text-gray-800 font-semibold text-lg mb-4">Where you'll sleep</span>
+                <div class="w-1/4 border border-gray-300 rounded-lg p-8 flex flex-col space-y-2">
+                    <i class="fa-solid fa-2xl fa-bed mb-3"></i>
+                    <span class="text-gray-800 font-semibold text-lg">Bedroom</span>
+                    <span class="text-sm text-gray-800 font-medium">{{room.bedrooms}} bedroom{{room.bedrooms|pluralize}}</span>
+                </div>
+            </div>
+
+            {% if room.amenities.count >= 1 %}
+                <div class="py-12 w-full border-b border-gray-300 flex flex-col">
+                    <span class="text-lg mb-4 font-semibold text-gray-800">Amenities</span>
+                    <div class="grid grid-cols-2 gap-x-10 gap-y-3">
+                        {% for a in room.amenities.all %}
+                            <span class="text-sm font-medium text-gray-700">{{a}}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if room.facilities.count >= 1 %}
+                <div class="py-12 w-full border-b border-gray-300 flex flex-col">
+                    <span class="text-lg mb-4 font-semibold text-gray-800">Facilities</span>
+                    <div class="grid grid-cols-2 gap-x-10 gap-y-3">
+                        {% for a in room.facilities.all %}
+                            <span class="text-sm font-medium text-gray-700">{{a}}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if room.house_rules.count >= 1 %}
+                <div class="py-12 w-full border-b border-gray-300 flex flex-col">
+                    <span class="text-lg mb-4 font-semibold text-gray-800">House rules</span>
+                    <div class="grid grid-cols-2 gap-x-10 gap-y-3">
+                        {% for a in room.house_rules.all %}
+                            <span class="text-sm font-medium text-gray-700">{{a}}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="py-12 w-full border-b border-gray-300 flex flex-col">
+                {% if room.reviews.count >= 1 %}
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-star fa-xl text-gray-900"></i>
+                        <span class="text-lg font-semibold text-gray-800">{{room.total_rating}}</span>
+                        <span class="text-lg">·</span>
+                        <span class="text-lg font-semibold text-gray-800">{{room.reviews.count}} review{{room.reviews.count|pluralize}}</span>
+                    </div>
+                {% else %}
+                    <span class="text-lg mb-4 font-semibold text-gray-800">No reviews (yet)</span>
+                {% endif %}
+            </div>
+
         </div>
         <div class="w-1/3">
 
