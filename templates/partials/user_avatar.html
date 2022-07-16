@@ -1,7 +1,7 @@
+{% load static %}
+
 {% if user.avatar %}
-    <div class="rounded-full w-32 h-32 bg-center bg-cover" style="background-image:url({{user.avatar.url}});"></div>
+    <div class="rounded-full {{w_and_h|default:'w-32 h-32'}} bg-center bg-cover" style="background-image:url({{user.avatar.url}});"></div>
 {% else %}
-    <div class="bg-gray-500 rounded-full w-32 h-32 flex items-center justify-center">
-        <span class="text-white font-medium text-3xl">{{user.first_name|first}}</span>
-    </div>
+    <img class="rounded-full {{w_and_h|default:'w-32 h-32'}} bg-center bg-cover" src="{% static 'img/noavatar.png' %}" />
 {% endif %}
