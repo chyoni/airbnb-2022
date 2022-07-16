@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage
 from django.urls import reverse
 from django_countries import countries
+
+from rooms import forms
 from . import models
 
 
@@ -140,3 +142,61 @@ def search(request):
         "rooms/search.html",
         context={**in_urls, **choices, "rooms": rooms},
     )
+
+
+def room_edit(request, pk):
+    try:
+        room = models.Room.objects.get(pk=pk)
+
+        if request.user != room.host:
+            return render(request, "401.html")
+
+        if request.method == "GET":
+            amenities = models.Amenity.objects.all()
+            selected_amenities = room.amenities.all()
+            c_amenities = ()
+
+            facilities = models.Facility.objects.all()
+            selected_facilities = room.facilities.all()
+            c_facilities = ()
+
+            house_rules = models.HouseRule.objects.all()
+            selected_house_rules = room.house_rules.all()
+            print(house_rules, selected_house_rules)
+
+            is_checked = False
+            for a in amenities:
+                for s_a in selected_amenities:
+                    if a.pk == s_a.pk:
+                        is_checked = True
+                if is_checked is True:
+                    c_amenities = c_amenities + ((a.pk, a.name, "checked"),)
+                else:
+                    c_amenities = c_amenities + ((a.pk, a.name, "unchecked"),)
+                is_checked = False
+
+            for a in facilities:
+                for s_a in selected_facilities:
+                    if a.pk == s_a.pk:
+                        is_checked = True
+                if is_checked is True:
+                    c_facilities = c_facilities + ((a.pk, a.name, "checked"),)
+                else:
+                    c_facilities = c_facilities + ((a.pk, a.name, "unchecked"),)
+                is_checked = False
+
+            form = forms.RoomEditForm(room=room)
+            return render(
+                request,
+                "rooms/edit.html",
+                {
+                    "form": form,
+                    "amenities": amenities,
+                    "c_amenities": c_amenities,
+                    "facilities": facilities,
+                    "c_facilities": c_facilities,
+                },
+            )
+
+    except models.Room.DoesNotExist:
+        return render(request, "404.html")

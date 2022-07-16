@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit room{% endblock title %}
+
+{% block search-bar %}{% endblock search-bar %}
+
+{% comment %} name
+description
+city
+price
+address
+guests
+beds
+bedrooms
+baths
+check_in
+check_out
+instant_book
+room_type
+amenities
+facilities
+house_rules {% endcomment %}
+
+{% block content %}
+<div class="xl:max-w-xl container mx-auto mt-40 flex items-center justify-center flex-col border border-gray-300 p-10 rounded-lg">
+    <form method="POST" class="w-full flex flex-col items-center justify-center space-y-5">
+        {% csrf_token %} 
+        
+        <div class="flex w-full flex-col space-y-2">
+            <label for="name" class="font-semibold">Room name</label>
+            <input type="text" id="name" class="basic_input {% if form.name.errors %}has_error{% endif %}" name="name" value="{{form.name.value}}" />
+            {% include 'partials/input_error.html' with field=form.name %}
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="description" class="font-semibold">Descrition</label>
+            <textarea id="description" name="description" class="basic_input h-32 {% if form.description.errors %}has_error{% endif %}">{{form.description.value}}</textarea>
+            {% include 'partials/input_error.html' with field=form.description %}
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="city" class="font-semibold">City</label>
+            <input type="text" id="city" class="basic_input {% if form.city.errors %}has_error{% endif %}" name="city" value="{{form.city.value}}" />
+            {% include 'partials/input_error.html' with field=form.city %}
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="address" class="font-semibold">Address</label>
+            <input type="text" id="address" class="basic_input {% if form.address.errors %}has_error{% endif %}" name="address" value="{{form.address.value}}" />
+            {% include 'partials/input_error.html' with field=form.address %}
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="price" class="font-semibold">Price</label>
+            <input type="number" id="price" class="basic_input {% if form.price.errors %}has_error{% endif %}" name="price" value="{{form.price.value}}" />
+            {% include 'partials/input_error.html' with field=form.price %}
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="guests" class="font-semibold">Guests</label>
+            <input type="number" id="guests" class="basic_input {% if form.guests.errors %}has_error{% endif %}" name="guests" value="{{form.guests.value}}" />
+            {% include 'partials/input_error.html' with field=form.guests %}
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="beds" class="font-semibold">Beds</label>
+            <input type="number" id="beds" class="basic_input {% if form.beds.errors %}has_error{% endif %}" name="beds" value="{{form.beds.value}}" />
+            {% include 'partials/input_error.html' with field=form.beds %}
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="bedrooms" class="font-semibold">Bedrooms</label>
+            <input type="number" id="bedrooms" class="basic_input {% if form.bedrooms.errors %}has_error{% endif %}" name="bedrooms" value="{{form.bedrooms.value}}" />
+            {% include 'partials/input_error.html' with field=form.bedrooms %}
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="baths" class="font-semibold">Baths</label>
+            <input type="number" id="baths" class="basic_input {% if form.baths.errors %}has_error{% endif %}" name="baths" value="{{form.baths.value}}" />
+            {% include 'partials/input_error.html' with field=form.baths %}
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="check_in" class="font-semibold">Check in (24h format)</label>
+            <input type="datetime" id="check_in" class="basic_input {% if form.check_in.errors %}has_error{% endif %}" name="check_in" value="{{form.check_in.value}}" />
+            {% include 'partials/input_error.html' with field=form.check_in %}
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="check_out" class="font-semibold">Check out (24h format)</label>
+            <input type="datetime" id="check_out" class="basic_input {% if form.check_out.errors %}has_error{% endif %}" name="check_out" value="{{form.check_out.value}}" />
+            {% include 'partials/input_error.html' with field=form.check_out %}
+        </div>
+
+        <div class="flex w-full space-x-2">
+            <label for="instant_book" class="font-semibold">Is instant book</label>
+            <input type="checkbox" id="instant_book" class="{% if form.instant_book.errors %}has_error{% endif %}" name="instant_book" value="{{form.instant_book.value}}" />
+            {% include 'partials/input_error.html' with field=form.instant_book %}
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="amenities" class="font-semibold">Amenities</label>         
+            <select multiple name="amenities" id="amenities" class="basic_input">
+                {% for pk, name, is_checked in c_amenities %}
+                <option value="{{pk}}" {% if is_checked == "checked" %}selected{% endif %}>{{name}}</option>
+                {% endfor %}
+            </select>
+            {% include 'partials/input_error.html' with field=form.amenities %}
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="facilities" class="font-semibold">Facilities</label>         
+            <select multiple name="facilities" id="facilities" class="basic_input">
+                {% for pk, name, is_checked in c_facilities %}
+                <option value="{{pk}}" {% if is_checked == "checked" %}selected{% endif %}>{{name}}</option>
+                {% endfor %}
+            </select>
+            {% include 'partials/input_error.html' with field=form.facilities %}
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="house_rules" class="font-semibold">House rules</label>         
+            <select multiple name="house_rules" id="house_rules" class="basic_input">
+                {% for pk, name, is_checked in c_house_rules %}
+                <option value="{{pk}}" {% if is_checked == "checked" %}selected{% endif %}>{{name}}</option>
+                {% endfor %}
+            </select>
+            {% include 'partials/input_error.html' with field=form.house_rules %}
+        </div>
+
+        <button class="basic_button text-gray-800 border border-gray-800">Edit</button>
+    </form>
+</div>
+{% endblock content %}

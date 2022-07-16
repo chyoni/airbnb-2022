@@ -347,3 +347,5 @@
 - #109 Room detail 3
 
 - #110 Room detail 4
+
+- #111 Room detail 5
