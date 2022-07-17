@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage
 from django.urls import reverse
@@ -247,5 +248,24 @@ def edit_photos(request, pk):
 
         return render(request, "rooms/edit_photos.html", {"room": room})
 
+    except models.Room.DoesNotExist:
+        return render(request, "404.html")
+
+
+@login_required(login_url="/users/login")
+def delete_photo(request, room_pk, photo_pk):
+
+    try:
+        room = models.Room.objects.get(pk=room_pk)
+
+        if room.host != request.user:
+            return render(request, "404.html")
+        try:
+            photo = models.Photo.objects.get(pk=photo_pk)
+            photo.delete()
+            messages.success(request, "Photo deleted")
+            return redirect(reverse("rooms:photos", kwargs={"pk": room_pk}))
+        except models.Photo.DoesNotExist:
+            return render(request, "404.html")
     except models.Room.DoesNotExist:
         return render(request, "404.html")

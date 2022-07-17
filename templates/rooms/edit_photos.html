@@ -31,8 +31,12 @@ house_rules {% endcomment %}
                 <span class="text-sm font-semibold">{{photo.caption}}</span>
             </div>
             <div class="flex w-1/3 flex-col space-y-2 justify-center items-end">
-                <div class="w-2/3 rounded-lg p-2 text-center bg-gray-800 text-white text-sm font-medium">Edit</div>
-                <div class="w-2/3 rounded-lg p-2 text-center bg-red-500 text-white text-sm font-medium">Delete</div>
+                <a class="w-2/3 rounded-lg p-2 text-center bg-gray-800 text-white text-sm font-medium">
+                    Edit
+                </a>
+                <a class="w-2/3 rounded-lg p-2 text-center bg-red-500 text-white text-sm font-medium" 
+                    href="{% url 'rooms:delete-photo' room_pk=room.pk photo_pk=photo.pk %}">Delete
+                </a>
             </div>
         </div>
     {% endfor %}
