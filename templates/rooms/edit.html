@@ -142,5 +142,11 @@ house_rules {% endcomment %}
 
         <button class="basic_button text-gray-800 border border-gray-800">Edit</button>
     </form>
+
+    <div class="mt-5 w-full flex items-center justify-center">
+        <a href="{% url 'rooms:photos' pk=room.pk %}" >
+            <span class="text-sm font-semibold text-red-500">Edit photo</span>
+        </a>
+    </div>
 </div>
 {% endblock content %}

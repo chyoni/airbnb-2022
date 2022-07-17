@@ -351,3 +351,5 @@
 - #111 Room detail 5
 
 - #112 Room update
+
+- #113 Room update 2 (photos)

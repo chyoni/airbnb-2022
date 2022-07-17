@@ -208,6 +208,7 @@ def room_edit(request, pk):
                     "c_facilities": c_facilities,
                     "c_house_rules": c_house_rules,
                     "room_type": room_type,
+                    "room": room,
                 },
             )
 
@@ -229,8 +230,22 @@ def room_edit(request, pk):
                     "c_facilities": c_facilities,
                     "c_house_rules": c_house_rules,
                     "room_type": room_type,
+                    "room": room,
                 },
             )
+
+    except models.Room.DoesNotExist:
+        return render(request, "404.html")
+
+
+def edit_photos(request, pk):
+    try:
+        room = models.Room.objects.get(pk=pk)
+
+        if request.user.pk != room.host.pk:
+            return render(request, "404.html")
+
+        return render(request, "rooms/edit_photos.html", {"room": room})
 
     except models.Room.DoesNotExist:
         return render(request, "404.html")
