@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit {{photo}} caption{% endblock title %}
+
+{% block search-bar %}{% endblock search-bar %}
+
+{% block content %}
+<div class="xl:max-w-xl container mx-auto mt-40 flex flex-col border border-gray-300 rounded-lg p-4">
+    <form method="POST" class="w-full flex flex-col items-center justify-center space-y-5">
+        {% csrf_token %} 
+
+        <div class="flex w-2/3 flex-col space-y-2">
+            <label for="caption" class="font-semibold">Caption</label>
+            <input type="text" id="caption" class="basic_input {% if form.caption.errors %}has_error{% endif %}" name="caption" value="{{form.caption.value}}" />
+            {% include 'partials/input_error.html' with field=form.caption %}
+        </div>
+
+        <button class="w-2/3 basic_button text-gray-800 border border-gray-800">Edit</button>
+    </form>
+</div>
+{% endblock content %}

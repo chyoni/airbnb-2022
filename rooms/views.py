@@ -269,3 +269,38 @@ def delete_photo(request, room_pk, photo_pk):
             return render(request, "404.html")
     except models.Room.DoesNotExist:
         return render(request, "404.html")
+
+
+@login_required(login_url="/users/login")
+def edit_photo(request, room_pk, photo_pk):
+
+    try:
+        room = models.Room.objects.get(pk=room_pk)
+
+        if room.host != request.user:
+            return render(request, "404.html")
+
+        try:
+            photo = models.Photo.objects.get(pk=photo_pk)
+            if request.method == "GET":
+
+                form = forms.EditPhotoForm(photo=photo)
+                return render(
+                    request, "rooms/edit_photo.html", {"form": form, "photo": photo}
+                )
+
+            if request.method == "POST":
+
+                form = forms.EditPhotoForm(request.POST, photo=photo)
+                if form.is_valid():
+                    form.save(photo_pk)
+                    messages.success(request, "Caption updated")
+                    return redirect(reverse("rooms:photos", kwargs={"pk": room_pk}))
+                messages.error(request, "Something wrong")
+                return render(
+                    request, "rooms/edit_photo.html", {"form": form, "photo": photo}
+                )
+        except models.Photo.DoesNotExist:
+            return render(request, "404.html")
+    except models.Room.DoesNotExist:
+        return render(request, "404.html")

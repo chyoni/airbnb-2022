@@ -99,3 +99,19 @@ class RoomEditForm(forms.Form):
             room.house_rules.clear()
             for r in new_house_rules:
                 room.house_rules.add(r)
+
+
+class EditPhotoForm(forms.Form):
+
+    caption = forms.CharField(required=True, max_length=180)
+
+    def __init__(self, *args, **kwargs):
+        photo = kwargs.pop("photo", None)
+        super(EditPhotoForm, self).__init__(*args, **kwargs)
+        self.fields["caption"].initial = photo.caption
+
+    def save(self, photo_pk):
+
+        photo = models.Photo.objects.get(pk=photo_pk)
+        photo.caption = self.cleaned_data["caption"]
+        photo.save()

@@ -12,5 +12,10 @@ urlpatterns = [
         views.delete_photo,
         name="delete-photo",
     ),
+    path(
+        "<int:room_pk>/photos/<int:photo_pk>/edit",
+        views.edit_photo,
+        name="edit-photo",
+    ),
     path("search/", views.search, name="search"),
 ]
