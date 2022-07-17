@@ -79,23 +79,35 @@ house_rules {% endcomment %}
             <input type="number" id="baths" class="basic_input {% if form.baths.errors %}has_error{% endif %}" name="baths" value="{{form.baths.value}}" />
             {% include 'partials/input_error.html' with field=form.baths %}
         </div>
-
+        
         <div class="flex w-full flex-col space-y-2">
             <label for="check_in" class="font-semibold">Check in (24h format)</label>
-            <input type="datetime" id="check_in" class="basic_input {% if form.check_in.errors %}has_error{% endif %}" name="check_in" value="{{form.check_in.value}}" />
+            <input type="text" id="check_in" class="basic_input {% if form.check_in.errors %}has_error{% endif %}" name="check_in" value="{{form.check_in.value|date:"H:i:s"}}" />
             {% include 'partials/input_error.html' with field=form.check_in %}
         </div>
 
         <div class="flex w-full flex-col space-y-2">
             <label for="check_out" class="font-semibold">Check out (24h format)</label>
-            <input type="datetime" id="check_out" class="basic_input {% if form.check_out.errors %}has_error{% endif %}" name="check_out" value="{{form.check_out.value}}" />
+            <input type="text" id="check_out" class="basic_input {% if form.check_out.errors %}has_error{% endif %}" name="check_out" value="{{form.check_out.value|date:"H:i:s"}}" />
             {% include 'partials/input_error.html' with field=form.check_out %}
         </div>
 
         <div class="flex w-full space-x-2">
             <label for="instant_book" class="font-semibold">Is instant book</label>
             <input type="checkbox" id="instant_book" class="{% if form.instant_book.errors %}has_error{% endif %}" name="instant_book" value="{{form.instant_book.value}}" />
-            {% include 'partials/input_error.html' with field=form.instant_book %}
+            <div class="block">
+                {% include 'partials/input_error.html' with field=form.instant_book %}
+            </div>
+        </div>
+
+        <div class="flex w-full flex-col space-y-2">
+            <label for="room_type" class="font-semibold">Room type</label>         
+            <select name="room_type" id="room_type" class="basic_input">
+                {% for t in room_type %}
+                    <option value="{{t.pk}}" {% if t.pk == form.room_type.value %}selected{% endif %}>{{t.name}}</option>
+                {% endfor %}
+            </select>
+            {% include 'partials/input_error.html' with field=form.room_type %}
         </div>
 
         <div class="flex w-full flex-col space-y-2">

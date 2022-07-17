@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage
 from django.urls import reverse
 from django_countries import countries
-
+from django.contrib import messages
 from rooms import forms
 from . import models
 
@@ -151,39 +151,52 @@ def room_edit(request, pk):
         if request.user != room.host:
             return render(request, "401.html")
 
-        if request.method == "GET":
-            amenities = models.Amenity.objects.all()
-            selected_amenities = room.amenities.all()
-            c_amenities = ()
+        amenities = models.Amenity.objects.all()
+        selected_amenities = room.amenities.all()
+        c_amenities = ()
 
-            facilities = models.Facility.objects.all()
-            selected_facilities = room.facilities.all()
-            c_facilities = ()
+        facilities = models.Facility.objects.all()
+        selected_facilities = room.facilities.all()
+        c_facilities = ()
 
-            house_rules = models.HouseRule.objects.all()
-            selected_house_rules = room.house_rules.all()
-            print(house_rules, selected_house_rules)
+        house_rules = models.HouseRule.objects.all()
+        selected_house_rules = room.house_rules.all()
+        c_house_rules = ()
 
+        room_type = models.RoomType.objects.all()
+
+        is_checked = False
+        for a in amenities:
+            for s_a in selected_amenities:
+                if a.pk == s_a.pk:
+                    is_checked = True
+            if is_checked is True:
+                c_amenities = c_amenities + ((a.pk, a.name, "checked"),)
+            else:
+                c_amenities = c_amenities + ((a.pk, a.name, "unchecked"),)
             is_checked = False
-            for a in amenities:
-                for s_a in selected_amenities:
-                    if a.pk == s_a.pk:
-                        is_checked = True
-                if is_checked is True:
-                    c_amenities = c_amenities + ((a.pk, a.name, "checked"),)
-                else:
-                    c_amenities = c_amenities + ((a.pk, a.name, "unchecked"),)
-                is_checked = False
 
-            for a in facilities:
-                for s_a in selected_facilities:
-                    if a.pk == s_a.pk:
-                        is_checked = True
-                if is_checked is True:
-                    c_facilities = c_facilities + ((a.pk, a.name, "checked"),)
-                else:
-                    c_facilities = c_facilities + ((a.pk, a.name, "unchecked"),)
-                is_checked = False
+        for a in facilities:
+            for s_a in selected_facilities:
+                if a.pk == s_a.pk:
+                    is_checked = True
+            if is_checked is True:
+                c_facilities = c_facilities + ((a.pk, a.name, "checked"),)
+            else:
+                c_facilities = c_facilities + ((a.pk, a.name, "unchecked"),)
+            is_checked = False
+
+        for a in house_rules:
+            for s_a in selected_house_rules:
+                if a.pk == s_a.pk:
+                    is_checked = True
+            if is_checked is True:
+                c_house_rules = c_house_rules + ((a.pk, a.name, "checked"),)
+            else:
+                c_house_rules = c_house_rules + ((a.pk, a.name, "unchecked"),)
+            is_checked = False
+
+        if request.method == "GET":
 
             form = forms.RoomEditForm(room=room)
             return render(
@@ -191,10 +204,31 @@ def room_edit(request, pk):
                 "rooms/edit.html",
                 {
                     "form": form,
-                    "amenities": amenities,
                     "c_amenities": c_amenities,
-                    "facilities": facilities,
                     "c_facilities": c_facilities,
+                    "c_house_rules": c_house_rules,
+                    "room_type": room_type,
+                },
+            )
+
+        if request.method == "POST":
+            form = forms.RoomEditForm(request.POST, room=room)
+
+            if form.is_valid():
+                form.save(room)
+                messages.success(request, "Update room successfully")
+                return redirect(reverse("rooms:detail", kwargs={"pk": room.pk}))
+
+            messages.error(request, "Something wrong")
+            return render(
+                request,
+                "rooms/edit.html",
+                {
+                    "form": form,
+                    "c_amenities": c_amenities,
+                    "c_facilities": c_facilities,
+                    "c_house_rules": c_house_rules,
+                    "room_type": room_type,
                 },
             )
 

@@ -349,3 +349,5 @@
 - #110 Room detail 4
 
 - #111 Room detail 5
+
+- #112 Room update
