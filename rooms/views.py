@@ -306,6 +306,7 @@ def edit_photo(request, room_pk, photo_pk):
         return render(request, "404.html")
 
 
+@login_required(login_url="/users/login")
 def upload_photo(request, room_pk):
 
     try:
@@ -314,8 +315,21 @@ def upload_photo(request, room_pk):
         if request.user != room.host:
             return render(request, "404.html")
 
-        form = forms.UploadPhotoForm()
+        if request.method == "GET":
 
-        return render(request, "rooms/upload_photo.html", {"form": form})
+            form = forms.UploadPhotoForm()
+            return render(request, "rooms/upload_photo.html", {"form": form})
+
+        if request.method == "POST":
+
+            form = forms.UploadPhotoForm(request.POST, request.FILES)
+
+            if form.is_valid():
+                print(form.cleaned_data)
+                form.save(room)
+                messages.success(request, "Photo uploaded")
+                return redirect(reverse("rooms:detail", kwargs={"pk": room_pk}))
+
+            return render(request, "rooms/upload_photo.html", {"form": form})
     except models.Room.DoesNotExist:
         return render(request, "404.html")

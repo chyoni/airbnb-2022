@@ -16,10 +16,11 @@
         </div>
 
         <div class="w-full flex items-center justify-center">
-            <label for="avatar" class="cursor-pointer border-2 border-red-400 hover:border-red-200 transition-colors rounded-lg">
+            <label for="upload_photo" class="cursor-pointer border-2 border-red-400 hover:border-red-200 transition-colors rounded-lg">
                 <div class="w-full p-10">Click upload photo</div>
-                <input type="file" id="avatar" hidden accept="image/*" name="avatar" />
+                <input type="file" id="upload_photo" hidden accept="photo/*" name="upload_photo" />
             </label>
+            {% include 'partials/input_error.html' with field=form.upload_photo %}
         </div>
 
         <div class="flex w-full flex-col space-y-2">

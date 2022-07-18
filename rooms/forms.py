@@ -103,7 +103,6 @@ class RoomEditForm(forms.Form):
 
 class EditPhotoForm(forms.Form):
 
-    avatar = forms.ImageField()
     caption = forms.CharField(required=True, max_length=180)
 
     def __init__(self, *args, **kwargs):
@@ -120,4 +119,17 @@ class EditPhotoForm(forms.Form):
 
 class UploadPhotoForm(forms.Form):
 
+    upload_photo = forms.ImageField()
     caption = forms.CharField(required=True, max_length=180)
+
+    def save(self, room):
+
+        room = models.Room.objects.get(pk=room.pk)
+        photo = self.cleaned_data["upload_photo"]
+
+        new_photo = models.Photo.objects.create(
+            caption=self.cleaned_data["caption"],
+            file=photo,
+            room=room,
+        )
+        new_photo.save()
