@@ -6,9 +6,12 @@
 
 {% block content %}
 <div class="xl:max-w-3xl container mx-auto mt-40 ">
-    <div class="-mt-14 mb-3">
+    <div class="w-full -mt-14 mb-3 flex items-center justify-between">
         <a href="{% url 'rooms:edit' pk=room.pk %}">
             <span class="text-sm font-medium text-red-500">&larr; Back to edit room</span>
+        </a>
+        <a href="{% url 'rooms:upload-photo' room_pk=room.pk %}" class="rounded-lg p-3 text-center bg-gray-800 text-white text-sm font-medium">
+            Upload photo
         </a>
     </div>
     <div class="flex flex-col border border-gray-300 rounded-lg">

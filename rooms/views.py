@@ -304,3 +304,18 @@ def edit_photo(request, room_pk, photo_pk):
             return render(request, "404.html")
     except models.Room.DoesNotExist:
         return render(request, "404.html")
+
+
+def upload_photo(request, room_pk):
+
+    try:
+        room = models.Room.objects.get(pk=room_pk)
+
+        if request.user != room.host:
+            return render(request, "404.html")
+
+        form = forms.UploadPhotoForm()
+
+        return render(request, "rooms/upload_photo.html", {"form": form})
+    except models.Room.DoesNotExist:
+        return render(request, "404.html")

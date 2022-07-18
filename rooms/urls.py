@@ -13,6 +13,11 @@ urlpatterns = [
         name="delete-photo",
     ),
     path(
+        "<int:room_pk>/photos/upload",
+        views.upload_photo,
+        name="upload-photo",
+    ),
+    path(
         "<int:room_pk>/photos/<int:photo_pk>/edit",
         views.edit_photo,
         name="edit-photo",

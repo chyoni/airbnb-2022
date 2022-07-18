@@ -357,3 +357,5 @@
 - #114 Room update 3 (photo delete)
 
 - #115 Room update 4 (photo caption edit)
+
+- #116 Room update 5 (photo upload)
