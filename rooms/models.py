@@ -112,9 +112,12 @@ class Room(core_models.TimeStampedModel):
     total_rating.short_description = "total"
 
     def first_photo(self):
-        # 이렇게 queryset array에서 첫번째거를 가져오고 싶다면 python 에서는 ,를 사용한다.
-        (photo,) = self.photos.all()[:1]
-        return photo.file.url
+        try:
+            # 이렇게 queryset array에서 첫번째거를 가져오고 싶다면 python 에서는 ,를 사용한다.
+            (photo,) = self.photos.all()[:1]
+            return photo.file.url
+        except ValueError:
+            return None
 
     def get_next_four_photos(self):
         photos = self.photos.all()[1:5]
