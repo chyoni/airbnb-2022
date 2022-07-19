@@ -367,3 +367,5 @@
   - host, guest
 
 - #119 Create room
+
+- #120 Reservation 1 (Calendar)
