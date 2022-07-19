@@ -23,4 +23,5 @@ urlpatterns = [
         name="edit-photo",
     ),
     path("search/", views.search, name="search"),
+    path("create/", views.create_room, name="create"),
 ]

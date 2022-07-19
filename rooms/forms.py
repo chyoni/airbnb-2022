@@ -133,3 +133,92 @@ class UploadPhotoForm(forms.Form):
             room=room,
         )
         new_photo.save()
+
+
+class CreateRoomForm(forms.Form):
+
+    name = forms.CharField(required=True)
+    description = forms.CharField(required=True)
+    city = forms.CharField(required=True)
+    price = forms.IntegerField(required=True)
+    address = forms.CharField(required=True)
+    guests = forms.IntegerField(required=True)
+    beds = forms.IntegerField(required=True)
+    bedrooms = forms.IntegerField(required=True)
+    baths = forms.IntegerField(required=True)
+    check_in = forms.CharField(required=True)
+    check_out = forms.CharField(required=True)
+    instant_book = forms.BooleanField(required=False)
+    room_type = forms.ModelChoiceField(
+        empty_label="Select room type",
+        required=True,
+        queryset=models.RoomType.objects.all(),
+        widget=forms.Select(attrs={"class": "basic_input"}),
+    )
+    amenities = forms.ModelMultipleChoiceField(
+        required=False,
+        queryset=models.Amenity.objects.all(),
+        widget=forms.SelectMultiple(attrs={"class": "basic_input"}),
+    )
+    facilities = forms.ModelMultipleChoiceField(
+        required=False,
+        queryset=models.Facility.objects.all(),
+        widget=forms.SelectMultiple(attrs={"class": "basic_input"}),
+    )
+    house_rules = forms.ModelMultipleChoiceField(
+        required=False,
+        queryset=models.HouseRule.objects.all(),
+        widget=forms.SelectMultiple(attrs={"class": "basic_input"}),
+    )
+
+    def save(self, user):
+
+        new_name = self.cleaned_data["name"]
+        new_description = self.cleaned_data["description"]
+        new_city = self.cleaned_data["city"]
+        new_price = self.cleaned_data["price"]
+        new_address = self.cleaned_data["address"]
+        new_guests = self.cleaned_data["guests"]
+        new_beds = self.cleaned_data["beds"]
+        new_bedrooms = self.cleaned_data["bedrooms"]
+        new_baths = self.cleaned_data["baths"]
+        new_check_in = self.cleaned_data["check_in"]
+        new_check_out = self.cleaned_data["check_out"]
+        new_instant_book = self.cleaned_data["instant_book"]
+        new_room_type = self.cleaned_data["room_type"]
+        new_amenities = self.cleaned_data["amenities"]
+        new_facilities = self.cleaned_data["facilities"]
+        new_house_rules = self.cleaned_data["house_rules"]
+
+        new_room = models.Room.objects.create(
+            name=new_name,
+            description=new_description,
+            city=new_city,
+            price=new_price,
+            address=new_address,
+            guests=new_guests,
+            beds=new_beds,
+            bedrooms=new_bedrooms,
+            baths=new_baths,
+            check_in=new_check_in,
+            check_out=new_check_out,
+            instant_book=new_instant_book,
+            room_type=new_room_type,
+            host=user,
+        )
+
+        new_room.save()
+
+        if len(new_amenities) > 0:
+            for a in new_amenities:
+                new_room.amenities.add(a)
+
+        if len(new_facilities) > 0:
+            for f in new_facilities:
+                new_room.facilities.add(f)
+
+        if len(new_house_rules) > 0:
+            for r in new_house_rules:
+                new_room.house_rules.add(r)
+
+        return new_room

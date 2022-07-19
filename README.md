@@ -365,3 +365,5 @@
 - #118 Request session
 
   - host, guest
+
+- #119 Create room
