@@ -298,3 +298,12 @@ def changePassword(request):
         if form.is_valid():
             form.save(user=request.user)
         return render(request, "users/change_password.html", {"form": form})
+
+
+@login_required(login_url="/users/login")
+def switch_hosting(request):
+    try:
+        del request.session["is_hosting"]
+    except KeyError:
+        request.session["is_hosting"] = True
+    return redirect(reverse("core:home"))

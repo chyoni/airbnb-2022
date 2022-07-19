@@ -361,3 +361,7 @@
 - #116 Room update 5 (photo upload)
 
 - #117 Room update 6 (photo upload done)
+
+- #118 Request session
+
+  - host, guest

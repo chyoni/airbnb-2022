@@ -18,4 +18,5 @@ urlpatterns = [
     path("<int:pk>/edit", views.editProfile, name="edit-profile"),
     path("<int:pk>/listings", views.usersListings, name="listings"),
     path("change-password/", views.changePassword, name="change-password"),
+    path("switch-hosting/", views.switch_hosting, name="switch-hosting"),
 ]
