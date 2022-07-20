@@ -369,3 +369,5 @@
 - #119 Create room
 
 - #120 Reservation 1 (Calendar)
+
+- #121 Reservation 2 (Calendar 2)
