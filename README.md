@@ -373,3 +373,7 @@
 - #121 Reservation 2 (Calendar 2)
 
 - #122 Reservation 3 (Calendar done)
+
+- #123 Rservation 4 (is_booking ?)
+
+  - making customized tags (is_booked)
