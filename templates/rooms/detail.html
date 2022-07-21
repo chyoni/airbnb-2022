@@ -92,7 +92,7 @@
             {% else %}
                 {% if not request.session.is_hosting %}
                     <div class="w-full h-auto flex flex-col space-y-10">
-                        {% for c in room.get_calendars %}
+                        {% for c in room.get_two_calendars %}
                             <div class="flex flex-col w-full items-center border border-gray-200 py-5 ml-3 rounded-lg">
                                 <span class="mb-10 font-semibold text-sm text-gray-800">{{c.get_month}} / {{c.year}}</span>
                                 <div class="grid grid-cols-7 gap-5 text-center">
@@ -101,8 +101,12 @@
                                     {% endfor %}
 
                                     {% for date in c.get_days %}
-                                        {% if date != 0 %}
-                                            <span class="bg-gray-500 p-1 text-white rounded-md cursor-pointer hover:bg-red-500 hover:transition-colors">{{date}}</span>
+                                        {% if date.day != 0 %}
+                                            {% if date.past %}
+                                                <span class="bg-gray-100 p-1 text-gray-400 rounded-md">{{date.day}}</span>
+                                            {% else %}
+                                                <span class="bg-gray-500 p-1 text-white rounded-md cursor-pointer hover:bg-red-500 hover:transition-colors">{{date.day}}</span>
+                                            {% endif %}
                                         {% else %}
                                             <span></span>
                                         {% endif %}
