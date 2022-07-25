@@ -12,6 +12,8 @@ def create(request, room_pk, year, month, day):
         room_models.Room.objects.get(pk=room_pk)
         day = datetime.datetime(year, month, day)
         models.BookedDay.objects.get(day=day)
+        messages.error(request, "Can't reservation that day")
+        return redirect(reverse("rooms:detail", kwargs={"pk": room_pk}))
     except room_models.Room.DoesNotExist:
         return render(request, "404.html")
     except models.BookedDay.DoesNotExist:

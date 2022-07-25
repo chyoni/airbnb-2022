@@ -379,3 +379,5 @@
   - making customized tags (is_booked)
 
 - #124 Reservation 5
+
+- #125 Extending objects manager
