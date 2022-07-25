@@ -381,3 +381,5 @@
 - #124 Reservation 5
 
 - #125 Extending objects manager
+
+- #126 Reservation 6

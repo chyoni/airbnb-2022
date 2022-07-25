@@ -29,4 +29,13 @@ def create(request, room_pk, year, month, day):
 
 
 def detail(request, pk):
-    pass
+
+    try:
+        reservation = models.Reservation.objects.get(pk=pk)
+
+        if request.user != reservation.guest:
+            return render(request, "404.html")
+
+        return render(request, "reservations/detail.html", {"reservation": reservation})
+    except models.Reservation.DoesNotExist:
+        return render(request, "404.html")

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{{reservation.room.name}} | Reservation{% endblock title %}
+
+{% block content %}
+    <div class="container mx-auto">
+        <div class="-mt-4 h-[50vh] w-full flex">
+            <div class="bg-center bg-cover w-1/2 h-full rounded-lg mr-3" style="background-image:url({{reservation.room.first_photo}})"></div>
+            <div class="grid grid-cols-2 gap-3 w-1/2 h-auto">
+                {% for photo in reservation.room.get_next_four_photos %}
+                    <div class="bg-center bg-cover rounded-lg" style="background-image:url({{photo.file.url}})"></div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="">
+            Your reservation is {{reservation.status}}
+        </div>
+    </div>
+{% endblock content %}
