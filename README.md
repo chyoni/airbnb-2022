@@ -385,3 +385,5 @@
 - #126 Reservation 6
 
 - #127 Reservation 7 (Cancel operation)
+
+- #128 Reservation 8 (Review)

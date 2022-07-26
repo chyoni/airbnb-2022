@@ -77,4 +77,4 @@ class Reservation(core_models.TimeStampedModel):
                         day=start + timedelta(days=i), reservation=self
                     )
 
-        # super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
