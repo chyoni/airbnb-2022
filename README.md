@@ -383,3 +383,5 @@
 - #125 Extending objects manager
 
 - #126 Reservation 6
+
+- #127 Reservation 7 (Cancel operation)

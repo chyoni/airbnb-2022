@@ -14,4 +14,5 @@ urlpatterns = [
         views.detail,
         name="detail",
     ),
+    path("<int:pk>/<str:operation>", views.cancel_reservation, name="cancel"),
 ]

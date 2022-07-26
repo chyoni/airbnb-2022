@@ -39,3 +39,22 @@ def detail(request, pk):
         return render(request, "reservations/detail.html", {"reservation": reservation})
     except models.Reservation.DoesNotExist:
         return render(request, "404.html")
+
+
+def cancel_reservation(request, pk, operation):
+    try:
+        reservation = models.Reservation.objects.get(pk=pk)
+
+        if reservation.guest != request.user and reservation.room.host != request.user:
+            return render(request, "404.html")
+
+        if operation == models.Reservation.STATUS_CANCELED:
+            reservation.status = models.Reservation.STATUS_CANCELED
+            reservation.save()
+            models.BookedDay.objects.filter(reservation=reservation).delete()
+            return redirect(
+                reverse("reservations:detail", kwargs={"pk": reservation.pk})
+            )
+        return render(request, "404.html")
+    except models.Reservation.DoesNotExist:
+        return render(request, "404.html")
