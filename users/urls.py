@@ -19,4 +19,5 @@ urlpatterns = [
     path("<int:pk>/listings", views.usersListings, name="listings"),
     path("change-password/", views.changePassword, name="change-password"),
     path("switch-hosting/", views.switch_hosting, name="switch-hosting"),
+    path("switch-language/", views.switch_language, name="switch-language"),
 ]

@@ -387,3 +387,13 @@
 - #127 Reservation 7 (Cancel operation)
 
 - #128 Reservation 8 (Review)
+
+- #129 Translation
+
+  - 아래 makemessages 명령어는 trans 라는 태그가 붙은 녀석들을 찾아서 settings.py에서 지정한 locale_path에 파일하나를 만들고 파일에서 해당 텍스트들을 입력시킨다.
+  - 아래 compilemessages 명령어는 저 makemessages로 만든 .po 파일에서 우리가 translation 작업을 다했으면 저 명령어를 입력해서 po파일을 compile한 파일을 하나 생성시킨다. 이건 장고가 읽는 파일이 된다.
+
+  ```bash
+  django-admin makemessages --locale=es
+  django-admin compilemessages
+  ```
