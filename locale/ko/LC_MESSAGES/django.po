@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-27 10:41+0900\n"
+"POT-Creation-Date: 2022-07-27 14:58+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
 #: templates/partials/footer.html:3
 msgid "All right reserved."
 msgstr "모든 검증이 완료된 상태입니다."
+
+#: templates/rooms/home.html:26
+#, python-format
+msgid "%(current_page)s of %(total_page)s"
+msgstr "%(current_page)s 중 %(total_page)s"

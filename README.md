@@ -399,3 +399,7 @@
   ```
 
 - #130 Translation 2
+
+- #131 Translation 3
+
+  - 변수가 있거나 할 때 번역하는 법

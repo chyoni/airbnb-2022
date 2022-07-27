@@ -1,5 +1,5 @@
 {% extends 'base.html' %} 
-
+{% load i18n %}
 {% block title %}
 Home
 {% endblock title %}
@@ -23,7 +23,7 @@ Home
             </a>
             {% endif %}
             
-            <span class="mx-3 text-base font-medium">{{rooms.number}} of {{rooms.paginator.num_pages}}</span>
+            <span class="mx-3 text-base font-medium">{% blocktrans with current_page=rooms.number total_page=rooms.paginator.num_pages%}{{current_page}} of {{total_page}}{% endblocktrans %}</span>
             
             {% if rooms.has_next %}
             <a href="?page={{rooms.number|add:1}}">
