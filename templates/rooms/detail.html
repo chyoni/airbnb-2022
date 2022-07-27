@@ -16,6 +16,13 @@
 
     <div class="w-full flex mt-10">
         <div class="w-2/3">
+            <div>
+                <div>
+                    <a class="w-1/5 p-2 rounded-lg bg-red-500 text-white" href="{% url 'lists:toggle-list' room.pk %}">
+                        <i class="fa-regular fa-star fa-lg"></i>
+                    </a>
+                </div>
+            </div>
             <div class="w-full flex justify-between border-b pb-12 border-gray-300">
                 <div class="flex flex-col justify-center space-y-2">
                     <span class="text-xl font-semibold text-gray-800">{{room.name}}</span>
