@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-27 14:58+0900\n"
+"POT-Creation-Date: 2022-07-27 15:07+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,3 +26,15 @@ msgstr "모든 검증이 완료된 상태입니다."
 #, python-format
 msgid "%(current_page)s of %(total_page)s"
 msgstr "%(current_page)s 중 %(total_page)s"
+
+#: users/models.py:17
+msgid "male"
+msgstr "남자"
+
+#: users/models.py:18
+msgid "female"
+msgstr "여자"
+
+#: users/models.py:86
+msgid "Verify ChyoneeBNB Account"
+msgstr "Chyonee BNB 계정을 인증하세요"

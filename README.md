@@ -403,3 +403,7 @@
 - #131 Translation 3
 
   - 변수가 있거나 할 때 번역하는 법
+
+- #132 Translation 4
+
+  - template이 아니라 python code에서 사용되는 문자열 번역하는 법

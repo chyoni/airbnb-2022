@@ -1,6 +1,7 @@
 import uuid
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.core.mail import send_mail
 from django.urls import reverse
@@ -13,8 +14,8 @@ class User(AbstractUser):
     """Custom User Model"""
 
     # Gender Choices
-    GENDER_MALE = "male"
-    GENDER_FEMALE = "female"
+    GENDER_MALE = _("male")
+    GENDER_FEMALE = _("female")
     GENDER_OTHER = "other"
 
     GENDER_CHOICES = (
@@ -82,7 +83,7 @@ class User(AbstractUser):
                 "emails/verify_email.html", {"secret": secret}
             )
             send_mail(
-                "Verify ChyoneeBNB Account",
+                _("Verify ChyoneeBNB Account"),
                 strip_tags(html_message),
                 settings.EMAIL_HOST_USER,
                 [self.email],
