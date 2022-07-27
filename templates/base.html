@@ -43,7 +43,8 @@
       const langSelect = document.getElementById("js-lang")
       handleSelector = () => {
         const selected = langSelect.value
-        fetch(`{% url 'users:switch-language' %}?lang=${selected}`).then(window.location.reload())
+        fetch(`{% url 'users:switch-language' %}?lang=${selected}`).then(() => window.location.reload())
+        
       }
       langSelect.addEventListener('change', handleSelector)
     </script>

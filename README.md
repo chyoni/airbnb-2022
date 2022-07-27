@@ -397,3 +397,5 @@
   django-admin makemessages --locale=es
   django-admin compilemessages
   ```
+
+- #130 Translation 2

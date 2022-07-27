@@ -2,9 +2,10 @@
 <footer class="container mx-auto pt-16 pb-5 mt-16 border-t text-center text-sm font-medium text-gray-600">
     &copy; 2022 Chyonee BNB, Inc. {% trans "All right reserved." %}
     <div class="mt-10">
+        {% get_current_language as LANGUAGE_CODE %}
         <select id="js-lang" class="p-2 border border-gray-700 rounded-lg">
-            <option value="en">English</option>
-            <option value="kr">Korea</option>
+            <option value="en" {% if LANGUAGE_CODE == "en" %}selected{% endif %}>English</option>
+            <option value="ko" {% if LANGUAGE_CODE == "ko" %}selected{% endif %}>Korea</option>
         </select>
     </div>
 </footer>
