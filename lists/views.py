@@ -26,3 +26,9 @@ def toggle_room(request, room_pk):
         return redirect(reverse("rooms:detail", kwargs={"pk": room_pk}))
     except room_models.Room.DoesNotExist:
         return render(request, "404.html")
+    except models.List.DoesNotExist:
+        list = models.List.objects.create(user=user, name="My List")
+        room = room_models.Room.objects.get(pk=room_pk)
+        list.add(room)
+        list.save()
+        return redirect(reverse("rooms:detail", kwargs={"pk": room_pk}))

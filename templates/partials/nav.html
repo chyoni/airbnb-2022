@@ -10,6 +10,7 @@
       {% if request.session.is_hosting %}
       <a href="{% url 'rooms:create' %}" class="text-[20px]"><i class="fa-solid fa-lg text-red-500 fa-circle-plus"></i></a>
       {% endif %}
+      <a href="{% url 'users:favs' user.pk %}" class="text-[20px]"><i class="fa-solid fa-lg text-red-500 fa-heart"></i></a>
       <a href="{% url 'users:profile' user.pk %}" class="text-[20px]"><i class="fa-solid fa-lg text-red-500 fa-circle-user"></i></a>
       <a href="{% url 'users:logout' %}" class="text-[20px]"><i class="fa-solid fa-lg text-red-500 fa-right-from-bracket"></i></a>
     {% else %}

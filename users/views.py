@@ -1,15 +1,17 @@
 import os
 from config import settings
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 import requests
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator, EmptyPage
 from django.views.generic.detail import DetailView
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.core.files.base import ContentFile
 from django.contrib import messages
 from . import forms, models, mixins
+from lists import models as list_models
 
 
 def login_user(request):
@@ -281,8 +283,54 @@ def editProfile(request, pk):
         pass
 
 
-def usersListings(request):
-    pass
+def users_listings(request, pk):
+
+    try:
+        user = models.User.objects.get(pk=pk)
+
+        page: str = request.GET.get("page", 1)
+
+        # 아래 코드가 쿼리셋을 바로 즉시 불러올거라고 에상하겠지만, 쿼리셋은 게으르다. 그래서 이 쿼리셋을 어디선가 호출하여 사용하지 않는 이상 그 때까지는 가져오지 않는다.
+        room_list = user.rooms.all()
+
+        paginator = Paginator(room_list, 30, orphans=5)
+
+        rooms = paginator.page(page)
+        return render(
+            request,
+            "users/lists.html",
+            context={"rooms": rooms, "a_user": user},
+        )
+    except models.User.DoesNotExist:
+        return render(request, "404.html")
+    except EmptyPage:
+        rooms = paginator.page(1)
+        return redirect("/?page=1")
+
+
+@login_required(login_url="/users/login")
+def users_favs(request, pk):
+    try:
+        user = models.User.objects.get(pk=pk)
+        list = list_models.List.objects.get(user=user)
+        page: str = request.GET.get("page", 1)
+
+        # 아래 코드가 쿼리셋을 바로 즉시 불러올거라고 에상하겠지만, 쿼리셋은 게으르다. 그래서 이 쿼리셋을 어디선가 호출하여 사용하지 않는 이상 그 때까지는 가져오지 않는다.
+        room_list = list.rooms.all()
+
+        paginator = Paginator(room_list, 30, orphans=5)
+
+        rooms = paginator.page(page)
+        return render(
+            request,
+            "users/lists.html",
+            context={"rooms": rooms, "a_user": user},
+        )
+    except (models.User.DoesNotExist, list_models.List.DoesNotExist):
+        return render(request, "404.html")
+    except EmptyPage:
+        rooms = paginator.page(1)
+        return redirect("/?page=1")
 
 
 @login_required(login_url="/users/login")
