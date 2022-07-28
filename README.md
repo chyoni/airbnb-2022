@@ -409,3 +409,5 @@
   - template이 아니라 python code에서 사용되는 문자열 번역하는 법
 
 - #133 List 1
+
+- #134 Is favourites (template tags)

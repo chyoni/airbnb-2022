@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load is_booked %}
+{% load is_booked is_favourites %}
 {% block title %}{{room.name}}{% endblock title %}
 
 {% block content %}
@@ -18,9 +18,16 @@
         <div class="w-2/3">
             <div>
                 <div>
-                    <a class="w-1/5 p-2 rounded-lg bg-red-500 text-white" href="{% url 'lists:toggle-list' room.pk %}">
-                        <i class="fa-regular fa-star fa-lg"></i>
-                    </a>
+                    {% is_favourites room user as is_favourites %}
+                    {% if is_favourites %}
+                        <a class="w-1/5 p-2 rounded-lg bg-red-500 text-white" href="{% url 'lists:toggle-list' room.pk %}">
+                            <i class="fa-solid fa-star fa-lg"></i>
+                        </a>
+                    {% else %}
+                        <a class="w-1/5 p-2 rounded-lg bg-white text-red-500 border border-red-300" href="{% url 'lists:toggle-list' room.pk %}">
+                            <i class="fa-regular fa-star fa-lg"></i>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
             <div class="w-full flex justify-between border-b pb-12 border-gray-300">
