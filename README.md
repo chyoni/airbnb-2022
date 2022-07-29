@@ -419,3 +419,17 @@
 - #137 Chat 2
 
 - #138 Chat done
+
+- #139 Amazon Elastic beanstalk
+
+  - Elastic beanstalk는 나 대신 자동으로 서버를 만들어주는 녀석 아마존에 EC2라는게 있는데 이 instance를 자동으로 만들어주는 녀석이다.
+
+  ```bash
+  pipenv install awsebcli --dev (EB CLI를 설치)
+
+  eb init
+  ```
+
+  - eb init 을 하면 아마존에게 우리가 누군지 init을 해야한다. 이 과정에서 맨 처음 지역선택으로 서울인 10번을 선택하면 aws-access-id를 입력하라고 하는데 이건 aws로 가서 IAM을 치면 User를 새로만들면 된다.
+    이 과정에서는 어떤 권한을 부여할건지 계정 생성 시 묻는데 Attach existing policies directly를 선택 후 AdministratorAccess를 선택하면 된다. 그렇게 생성하면 Access key ID랑 Secret access key를 한번만 보여주는데
+    잘 저장할 것 이 Aceess key ID가 aws-access-id 입력 시 필요한 값이고 Secret access key가 바로 그 다음 입력해야하는 aws-secret-key 입력 시 필요한 값이다.
