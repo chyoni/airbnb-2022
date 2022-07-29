@@ -457,3 +457,7 @@
 - #141 Amazon Elastic beanstalk 4
 
   - DB Settings
+
+- #142 Amazon Elastic beanstalk 5
+
+  - DB Settings 2 (AWS RDS)
