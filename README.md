@@ -452,4 +452,8 @@
 - #141 Amazon Elastic beanstalk 3
 
   -Elastic beanstalk가 우리가 필요한 package를 설치하기 위해서는, requirements.txt 라는 파일을 root경로에서 찾는다.
-  이 파일을 생성하기 위해 pip freeze > requirements.txt 를 커맨드에 입력해주면 된다. 그리고 deploy를 하기전 항상 git에 업로드하는 것 잊지말기 !
+  이 파일을 생성하기 위해 pip freeze > requirements.txt 를 커맨드에 입력해주면 된다. 그리고 eb deploy를 하기전 항상 git에 업로드하는 것 잊지말기 !
+
+- #141 Amazon Elastic beanstalk 4
+
+  - DB Settings
