@@ -447,3 +447,9 @@
 
   - eb create <이름> 을 치게되면 Amazon Elastic beanstalk에서 서버하나를 생성해서 그 서버에서 필요한 것들을 생성한다. 도커 컨테이너를 만들고 그 컨테이너의 우리 소스를 넣는다고 생각하면 된다.
   - eb create이 끝나면 eb deploy를 해서 우리의 서버의 코드의 변경사항들을 반영하는데 이때 eb deploy를 하면 elastic beanstalk는 우리 git의 마지막 commit 소스를 가져와서 deploy한다는 점을 꼭 기억할 것!
+  - eb logs 는 말 그대로 로그를 보여주는 명령어 그냥 참고~
+
+- #141 Amazon Elastic beanstalk 3
+
+  -Elastic beanstalk가 우리가 필요한 package를 설치하기 위해서는, requirements.txt 라는 파일을 root경로에서 찾는다.
+  이 파일을 생성하기 위해 pip freeze > requirements.txt 를 커맨드에 입력해주면 된다. 그리고 deploy를 하기전 항상 git에 업로드하는 것 잊지말기 !
