@@ -25,8 +25,9 @@
                 {% endfor %}
             </div>
 
-            <div class="relative mt-5 w-full">
-                <input class="basic_input" />
+            <form class="relative mt-5 w-full" method="POST" action="{% url 'conversations:send' conversation.pk %}">
+                {% csrf_token %}
+                <input class="basic_input" name="message" id="message" placeholder="Send a message" />
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2">
                     <button
                         class="flex items-center bg-orange-400 rounded-full px-2 py-1 text-sm text-white hover:bg-orange-500 cursor-pointer 
@@ -35,7 +36,7 @@
                         &rarr;
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 {% endblock content %}
