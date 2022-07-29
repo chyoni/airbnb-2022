@@ -433,3 +433,17 @@
   - eb init 을 하면 아마존에게 우리가 누군지 init을 해야한다. 이 과정에서 맨 처음 지역선택으로 서울인 10번을 선택하면 aws-access-id를 입력하라고 하는데 이건 aws로 가서 IAM을 치면 User를 새로만들면 된다.
     이 과정에서는 어떤 권한을 부여할건지 계정 생성 시 묻는데 Attach existing policies directly를 선택 후 AdministratorAccess를 선택하면 된다. 그렇게 생성하면 Access key ID랑 Secret access key를 한번만 보여주는데
     잘 저장할 것 이 Aceess key ID가 aws-access-id 입력 시 필요한 값이고 Secret access key가 바로 그 다음 입력해야하는 aws-secret-key 입력 시 필요한 값이다.
+
+- #140 Amazon Elastic beanstalk 2
+
+  - 참고: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-django.html
+
+  - .ebextensions folder create
+  - django.config file create
+
+  ```bash
+  eb create chyonee-bnb
+  ```
+
+  - eb create <이름> 을 치게되면 Amazon Elastic beanstalk에서 서버하나를 생성해서 그 서버에서 필요한 것들을 생성한다. 도커 컨테이너를 만들고 그 컨테이너의 우리 소스를 넣는다고 생각하면 된다.
+  - eb create이 끝나면 eb deploy를 해서 우리의 서버의 코드의 변경사항들을 반영하는데 이때 eb deploy를 하면 elastic beanstalk는 우리 git의 마지막 commit 소스를 가져와서 deploy한다는 점을 꼭 기억할 것!
