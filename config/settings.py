@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-*tb#=@u#874b03cn=3(7!9*n0$#n6@hm*5jj_$xg*o5h&(d*b!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get("DEBUG"))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["airbnb-2022.eba-jxwk2wv9.ap-northeast-2.elasticbeanstalk.com"]
 
 
 # Application definition
