@@ -24,7 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-*tb#=@u#874b03cn=3(7!9*n0$#n6@hm*5jj_$xg*o5h&(d*b!"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get("DEBUG"))
+# DEBUG = bool(os.environ.get("DEBUG"))
+DEBUG = True
 
 ALLOWED_HOSTS = ["airbnb-2022.eba-jxwk2wv9.ap-northeast-2.elasticbeanstalk.com"]
 
@@ -89,7 +90,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-if DEBUG:
+if DEBUG is False:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
