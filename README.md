@@ -426,7 +426,7 @@
 
   ```bash
   pipenv install awsebcli --dev (EB CLI를 설치)
-
+  pipenv run pipenv_to_requirements -f
   eb init
   ```
 
